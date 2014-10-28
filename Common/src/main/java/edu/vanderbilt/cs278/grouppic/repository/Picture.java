@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.imageio.ImageIO;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -37,11 +38,13 @@ public class Picture {
     /**
      * Collection of strings representing the ids of the recipients
      */
+    @ElementCollection
     private Collection<Long> recipients;
 
     /**
      * Either a string of the id of captions, or a change to a list of caption objects
      */
+    @ElementCollection
     private Collection<String> captions;
 
     /**
@@ -62,6 +65,14 @@ public class Picture {
         this.captions = new ArrayList<String>();
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getSender() { return sender; }
 
     public void setSender(String sender) { this.sender = sender; }
@@ -78,6 +89,10 @@ public class Picture {
 
     public void setCaptions(Collection<String> captions) { this.captions = captions; }
 
+    public byte[] getImage() { return image; }
+
+    public void setImage(byte[] image) { this.image = image; }
+
 
 
     /**
@@ -85,7 +100,7 @@ public class Picture {
      *
      * @return The image in the byte array
      */
-    public BufferedImage getImage() throws IOException{
+    public BufferedImage getBufferedImage() throws IOException{
         return ImageIO.read(new ByteArrayInputStream(image));
     }
 

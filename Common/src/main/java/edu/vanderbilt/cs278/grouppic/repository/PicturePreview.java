@@ -23,6 +23,14 @@ public class PicturePreview {
         this.sender = sender;
     }
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public long getDate() { return date; }
 
     public void setDate(long date) { this.date = date; }
