@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="openpojo-0.4.9">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.openpojo/openpojo/0.4.9/e923a004d03c524b137fcf28c81551f51cd4b719/openpojo-0.4.9.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.googlecode.openpojo/openpojo/0.4.9/b25e67468162a2bab056cb84cd1c868543398554/openpojo-0.4.9-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
