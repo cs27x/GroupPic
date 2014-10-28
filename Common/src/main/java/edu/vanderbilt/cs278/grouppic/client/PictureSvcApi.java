@@ -19,22 +19,22 @@ import retrofit.http.Path;
  */
 public interface PictureSvcApi {
 
-    public static final String PHOTO_PATH = "/video";
+    public static final String PICTURE_PATH = "/picture";
 
         public static final String COMMENT_PATH = "/comments";
 
-    public static final String POST_COMMENT_PATH = PHOTO_PATH + "/comment";
+    public static final String POST_COMMENT_PATH = PICTURE_PATH + "/comment";
 
-    @GET(PHOTO_PATH)
+    @GET(PICTURE_PATH)
     public Collection<PicturePreview> getPictureList();
 
-    @POST(PHOTO_PATH)
+    @POST(PICTURE_PATH)
     public void sendPicture(@Body Picture p);
 
-    @GET(PHOTO_PATH + "/{id}")
+    @GET(PICTURE_PATH + "/{id}")
     public Picture getPictureWithId(@Path("id") long id);
 
-    @GET(PHOTO_PATH + "/{id}" + COMMENT_PATH)
+    @GET(PICTURE_PATH + "/{id}" + COMMENT_PATH)
     public Collection<Comment> getComments(@Path("id") long id);
 
     @POST(POST_COMMENT_PATH)
