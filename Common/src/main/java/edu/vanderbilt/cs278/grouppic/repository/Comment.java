@@ -11,7 +11,7 @@ import javax.persistence.Id;
  * Class to store the information for a
  */
 @Entity
-public class Caption {
+public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
