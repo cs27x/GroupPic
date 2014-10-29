@@ -16,6 +16,8 @@ import org.magnum.mobilecloud.video.repository.Video;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
+import edu.vanderbilt.cs278.grouppic.client.CallableTask;
+import edu.vanderbilt.cs278.grouppic.client.TaskCallback;
 
 /**
  * 
@@ -57,31 +59,31 @@ public class LoginScreenActivity extends Activity {
 
 		CallableTask.invoke(new Callable<Collection<Video>>() {
 
-			@Override
-			public Collection<Video> call() throws Exception {
-				return svc.getVideoList();
-			}
-		}, new TaskCallback<Collection<Video>>() {
+            @Override
+            public Collection<Video> call() throws Exception {
+                return svc.getVideoList();
+            }
+        }, new TaskCallback<Collection<Video>>() {
 
-			@Override
-			public void success(Collection<Video> result) {
-				// OAuth 2.0 grant was successful and we
-				// can talk to the server, open up the video listing
-				startActivity(new Intent(
-						LoginScreenActivity.this,
-						VideoListActivity.class));
-			}
+            @Override
+            public void success(Collection<Video> result) {
+                // OAuth 2.0 grant was successful and we
+                // can talk to the server, open up the video listing
+                startActivity(new Intent(
+                        LoginScreenActivity.this,
+                        VideoListActivity.class));
+            }
 
-			@Override
-			public void error(Exception e) {
-				Log.e(LoginScreenActivity.class.getName(), "Error logging in via OAuth.", e);
-				
-				Toast.makeText(
-						LoginScreenActivity.this,
-						"Login failed, check your Internet connection and credentials.",
-						Toast.LENGTH_SHORT).show();
-			}
-		});
+            @Override
+            public void error(Exception e) {
+                Log.e(LoginScreenActivity.class.getName(), "Error logging in via OAuth.", e);
+
+                Toast.makeText(
+                        LoginScreenActivity.this,
+                        "Login failed, check your Internet connection and credentials.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 	}
 
 }

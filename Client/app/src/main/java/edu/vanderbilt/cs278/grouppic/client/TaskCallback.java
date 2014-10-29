@@ -4,7 +4,7 @@
 **
 ** 
 */
-package org.magnum.videoup.client;
+package edu.vanderbilt.cs278.grouppic.client;
 
 public interface TaskCallback<T> {
 
