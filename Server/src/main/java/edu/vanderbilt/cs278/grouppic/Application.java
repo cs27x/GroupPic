@@ -1,8 +1,8 @@
-package org.magnum.mobilecloud.video;
+package edu.vanderbilt.cs278.grouppic;
 
 import org.magnum.mobilecloud.video.json.ResourcesMapper;
 import org.magnum.mobilecloud.video.repository.Video;
-import org.magnum.mobilecloud.video.repository.VideoRepository;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -30,7 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 // find any Controllers or other components that are part of our applciation.
 // Any class in this package that is annotated with @Controller is going to be
 // automatically discovered and connected to the DispatcherServlet.
-@ComponentScan(basePackages = {"org.magnum.mobilecloud.video", "edu.vanderbilt.cs278.grouppic.repository"})
+@ComponentScan
 public class Application extends RepositoryRestMvcConfiguration {
 
 	// Tell Spring to launch our app!
