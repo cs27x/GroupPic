@@ -30,7 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 // find any Controllers or other components that are part of our applciation.
 // Any class in this package that is annotated with @Controller is going to be
 // automatically discovered and connected to the DispatcherServlet.
-@ComponentScan
+@ComponentScan(basePackages = {"org.magnum.mobilecloud.video", "edu.vanderbilt.cs278.grouppic.repository"})
 public class Application extends RepositoryRestMvcConfiguration {
 
 	// Tell Spring to launch our app!

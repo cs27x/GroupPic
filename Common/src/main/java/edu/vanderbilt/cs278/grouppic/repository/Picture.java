@@ -19,6 +19,7 @@ import javax.persistence.Id;
  *
  * Basic object for storing information about a picture message
  */
+@Entity
 public class Picture {
 
     @Id
