@@ -24,7 +24,11 @@ import butterknife.InjectView;
 import edu.vanderbilt.cs278.grouppic.repository.Comment;
 import edu.vanderbilt.cs278.grouppic.repository.Picture;
 
-
+/**
+ * @author andrewbachman
+ *
+ * Activity to display the details view of a picture along with the comments for the picture.
+ */
 public class PhotoDetailActivity extends Activity {
 
     ArrayList<Comment> comments;
@@ -46,9 +50,16 @@ public class PhotoDetailActivity extends Activity {
 
         ButterKnife.inject(this);
 
-        img_ = (ImageView) findViewById(R.id.detail_imageView);
-
         img_.setImageResource(R.drawable.android_wallpaper);
+
+        if (savedInstanceState != null) {
+            currentPicture_ = savedInstanceState.getLong("id");
+        }
+
+        if (currentPicture_ != 0) {
+            refreshComments();
+            getCurrentPicture();
+        }
 
         content = new ArrayList<String>();
 
@@ -104,7 +115,7 @@ public class PhotoDetailActivity extends Activity {
         }
     }
 
-    private void refreshMessages() {
+    private void refreshComments() {
         final PictureSvcApi svc = PictureSvc.getOrShowLogin(this);
 
         if (svc != null) {
