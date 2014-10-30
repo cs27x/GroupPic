@@ -2,6 +2,7 @@ package edu.vanderbilt.cs278.grouppic.client;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import org.magnum.mobilecloud.video.client.VideoSvcApi;
 import org.magnum.videoup.client.LoginScreenActivity;
@@ -45,10 +46,16 @@ public class PictureSvc {
     }
     */
     public static synchronized PictureSvcApi init() {
+        /*
+        This section is commented out for testing purposes
+        When the server is running it should be replaced
         pictureSvc_ = new RestAdapter.Builder().setEndpoint(SERVER)
                 .setLogLevel(RestAdapter.LogLevel.FULL).build()
                 .create(PictureSvcApi.class);
+                */
 
+        pictureSvc_ = new TestPictureSvcApi(); // This is an implementation of the API interface for testing
+        Log.d("TEST API", "CREATED");
         return pictureSvc_;
     }
 }

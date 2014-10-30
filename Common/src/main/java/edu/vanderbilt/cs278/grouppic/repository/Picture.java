@@ -62,7 +62,6 @@ public class Picture {
         this.date = date;
         this.recipients = recipients;
         this.image = image;
-        this.captions = new ArrayList<String>();
     }
 
     public long getId() {
@@ -84,10 +83,6 @@ public class Picture {
     public Collection<Long> getRecipients() { return recipients; }
 
     public void setRecipients(Collection<Long> recipients) { this.recipients = recipients; }
-
-    public Collection<String> getCaptions() { return captions; }
-
-    public void setCaptions(Collection<String> captions) { this.captions = captions; }
 
     public byte[] getImage() { return image; }
 

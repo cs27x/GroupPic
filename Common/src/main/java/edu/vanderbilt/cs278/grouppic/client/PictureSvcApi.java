@@ -21,7 +21,7 @@ public interface PictureSvcApi {
 
     public static final String PICTURE_PATH = "/picture";
 
-        public static final String COMMENT_PATH = "/comments";
+    public static final String COMMENT_PATH = "/comments";
 
     public static final String POST_COMMENT_PATH = PICTURE_PATH + "/comment";
 

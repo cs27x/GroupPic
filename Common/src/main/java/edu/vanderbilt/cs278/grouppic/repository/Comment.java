@@ -21,6 +21,17 @@ public class Comment {
     private int votes;
     private String content;
 
+    public Comment() {
+        this.user = "";
+        this.votes = 0;
+        this.content = "";
+    }
+    public Comment(String user, String content) {
+        this.user = user;
+        this.votes = 0;
+        this.content = content;
+    }
+
     public long getId() {
         return id;
     }
