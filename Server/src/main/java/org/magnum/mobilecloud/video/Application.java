@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
+import edu.vanderbilt.cs278.grouppic.repository.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 //Tell Spring to automatically inject any dependencies that are marked in
@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @EnableAutoConfiguration
 // Tell Spring to automatically create a JPA implementation of our
 // VideoRepository
-@EnableJpaRepositories(basePackageClasses = VideoRepository.class)
+@EnableJpaRepositories(basePackageClasses = PictureRepository.class)
 // Tell Spring to turn on WebMVC (e.g., it should enable the DispatcherServlet
 // so that requests can be routed to our Controllers)
 @EnableWebMvc
@@ -63,7 +63,7 @@ public class Application extends RepositoryRestMvcConfiguration {
 	@Override
 	protected void configureRepositoryRestConfiguration(
 			RepositoryRestConfiguration config) {
-		config.exposeIdsFor(Video.class);
+		config.exposeIdsFor(Picture.class);
 	}
 
 }

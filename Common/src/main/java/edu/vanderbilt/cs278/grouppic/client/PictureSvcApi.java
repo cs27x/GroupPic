@@ -10,6 +10,9 @@ import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
+import retrofit.http.Multipart;
+import retrofit.http.Part;
+import retrofit.mime.TypedFile;
 
 /**
  * Created by andrewbachman on 10/28/14.
@@ -28,6 +31,10 @@ public interface PictureSvcApi {
     @GET(PICTURE_PATH)
     public Collection<PicturePreview> getPictureList();
 
+    @Multipart
+    @POST(PICTURE_PATH)
+    public void sendImageFile(@Part("photo") TypedFile photo, @Part("description") String description);
+    
     @POST(PICTURE_PATH)
     public void sendPicture(@Body Picture p);
 
