@@ -5,8 +5,8 @@ import java.util.Collection;
 import edu.vanderbilt.cs278.grouppic.repository.Comment;
 import edu.vanderbilt.cs278.grouppic.repository.Picture;
 import edu.vanderbilt.cs278.grouppic.repository.PicturePreview;
-
 import retrofit.http.Body;
+import retrofit.http.DELETE;
 import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
@@ -29,15 +29,18 @@ public interface PictureSvcApi {
     public static final String POST_COMMENT_PATH = PICTURE_PATH + "/comment";
 
     @GET(PICTURE_PATH)
-    public Collection<PicturePreview> getPictureList();
+    public Collection<Picture> getPictureList();
 
     @Multipart
     @POST(PICTURE_PATH)
     public void sendImageFile(@Part("photo") TypedFile photo, @Part("description") String description);
     
     @POST(PICTURE_PATH)
-    public void sendPicture(@Body Picture p);
+    public Void sendPicture(@Body Picture p);
 
+	@DELETE(PICTURE_PATH + "/{id}")
+	public void deletePicture(@Path("id") long id);
+	
     @GET(PICTURE_PATH + "/{id}")
     public Picture getPictureWithId(@Path("id") long id);
 

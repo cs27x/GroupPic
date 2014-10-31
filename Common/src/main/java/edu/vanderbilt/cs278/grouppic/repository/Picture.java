@@ -3,11 +3,16 @@ package edu.vanderbilt.cs278.grouppic.repository;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
+import javax.imageio.stream.ImageInputStream;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,7 +39,7 @@ public class Picture {
     /**
      * Date the picture was sent
      */
-    private long date;
+    private Date date;
 
     /**
      * Collection of strings representing the ids of the recipients
@@ -58,7 +63,7 @@ public class Picture {
 
     }
 
-    public Picture(String sender, long date, Collection<Long> recipients, byte[] image) {
+    public Picture(String sender, Date date, Collection<Long> recipients, byte[] image) {
         this.sender = sender;
         this.date = date;
         this.recipients = recipients;
@@ -78,9 +83,9 @@ public class Picture {
 
     public void setSender(String sender) { this.sender = sender; }
 
-    public long getDate() { return date; }
+    public Date getDate() { return date; }
 
-    public void setDate(long date) { this.date = date; }
+    public void setDate(Date date) { this.date = date; }
 
     public Collection<Long> getRecipients() { return recipients; }
 
@@ -112,6 +117,17 @@ public class Picture {
      */
     public PicturePreview getPreview() {
         return new PicturePreview(this.date, this.sender);
+    }
+    
+    /**
+     * @author Jejo Koola
+     * @param is an InputStream object that points to an image file, from which we will 
+     * 	read bytes
+     * @throws IOException 
+     */
+    public void setImageFromStream(ImageInputStream imageStream) throws IOException {
+    	image = new byte[(int) imageStream.length()];
+    	imageStream.readFully(image);
     }
 
 }
