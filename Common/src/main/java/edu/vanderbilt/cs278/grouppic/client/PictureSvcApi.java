@@ -31,10 +31,11 @@ public interface PictureSvcApi {
     @GET(PICTURE_PATH)
     public Collection<Picture> getPictureList();
 
+    /*
     @Multipart
     @POST(PICTURE_PATH)
     public void sendImageFile(@Part("photo") TypedFile photo, @Part("description") String description);
-    
+    */
     @POST(PICTURE_PATH)
     public Void sendPicture(@Body Picture p);
 

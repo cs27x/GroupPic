@@ -20,10 +20,14 @@ import junit.framework.TestCase;
 
 import org.magnum.mobilecloud.video.TestUtils;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import edu.vanderbilt.cs278.grouppic.repository.Picture;
 import edu.vanderbilt.cs278.grouppic.client.PictureSvcApi;
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
+import retrofit.converter.GsonConverter;
 
 /**
  * 
@@ -35,10 +39,14 @@ import retrofit.RestAdapter.LogLevel;
  */
 public class PictureSvcClientApiTest extends TestCase {
 
-	private final String TEST_URL = "http://localhost:8080";
-
-	private PictureSvcApi picService = new RestAdapter.Builder()
-			.setEndpoint(TEST_URL).setLogLevel(LogLevel.FULL).build()
+	private final static String TEST_URL = "http://localhost:8080";
+	private static final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+	
+	private static final PictureSvcApi picService = new RestAdapter.Builder()
+			.setEndpoint(TEST_URL)
+			.setLogLevel(LogLevel.FULL)
+			.setConverter(new GsonConverter(gson))
+			.build()
 			.create(PictureSvcApi.class);
 
 	private static final String TEST_IMAGE_1 = "/jackson-poster.jpg";
@@ -62,7 +70,9 @@ public class PictureSvcClientApiTest extends TestCase {
 		// ImageInputStream iis = ImageIO.createImageInputStream(is);
 		// System.out.println(iis.length());
 		// pic.setImageFromStream(iis);
-		pic.setImage(pretendImageData);
+		// pic.setImage(pretendImageData);
+		
+		
 	}
 	
 	/**

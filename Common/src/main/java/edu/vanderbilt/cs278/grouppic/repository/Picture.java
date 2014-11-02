@@ -44,33 +44,41 @@ public class Picture {
     /**
      * Collection of strings representing the ids of the recipients
      */
-    @ElementCollection
-    private Collection<Long> recipients;
+    // @ElementCollection
+    // private Collection<Long> recipients;
 
     /**
      * Either a string of the id of captions, or a change to a list of caption objects
      */
-    @ElementCollection
-    private Collection<String> captions;
+    // @ElementCollection
+    // private Collection<String> captions;
 
     /**
      * Byte array storing the image.
      * Stored as a byte array to allow sending over HTTP and allow for easier JSON parsing
      */
-    private byte[] image;
+    // private byte[] image;
 
     public Picture() {
 
     }
-
-    public Picture(String sender, Date date, Collection<Long> recipients, byte[] image) {
+/*
+    public Picture(String sender, long date, Collection<Long> recipients, byte[] image) {
         this.sender = sender;
         this.date = date;
         this.recipients = recipients;
         this.image = image;
         this.captions = new ArrayList<String>();
     }
-
+*/
+    public Picture(String sender, Date date, Collection<Long> recipients, byte[] image) {
+        this.sender = sender;
+        this.date = date;
+        // this.recipients = recipients;
+        // this.image = image;
+        // this.captions = new ArrayList<String>();
+    }
+    
     public long getId() {
         return id;
     }
@@ -86,7 +94,7 @@ public class Picture {
     public Date getDate() { return date; }
 
     public void setDate(Date date) { this.date = date; }
-
+/*
     public Collection<Long> getRecipients() { return recipients; }
 
     public void setRecipients(Collection<Long> recipients) { this.recipients = recipients; }
@@ -98,7 +106,7 @@ public class Picture {
     public byte[] getImage() { return image; }
 
     public void setImage(byte[] image) { this.image = image; }
-
+*/
 
 
     /**
@@ -106,10 +114,10 @@ public class Picture {
      *
      * @return The image in the byte array
      */
-    public BufferedImage getBufferedImage() throws IOException{
+ /*   public BufferedImage getBufferedImage() throws IOException{
         return ImageIO.read(new ByteArrayInputStream(image));
     }
-
+*/
     /**
      * @author andrewbachman
      *
@@ -126,8 +134,8 @@ public class Picture {
      * @throws IOException 
      */
     public void setImageFromStream(ImageInputStream imageStream) throws IOException {
-    	image = new byte[(int) imageStream.length()];
-    	imageStream.readFully(image);
+    //	image = new byte[(int) imageStream.length()];
+    //	imageStream.readFully(image);
     }
 
 }

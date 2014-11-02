@@ -1,6 +1,6 @@
 package edu.vanderbilt.cs278.grouppic;
 
-import org.magnum.mobilecloud.video.json.ResourcesMapper;
+import edu.vanderbilt.cs278.grouppic.json.ResourcesMapper;
 import org.magnum.mobilecloud.video.repository.Video;
 
 import org.springframework.boot.SpringApplication;

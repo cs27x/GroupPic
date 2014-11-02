@@ -1,4 +1,4 @@
-package org.magnum.mobilecloud.video.json;
+package edu.vanderbilt.cs278.grouppic.json;
 
 import java.io.IOException;
 
