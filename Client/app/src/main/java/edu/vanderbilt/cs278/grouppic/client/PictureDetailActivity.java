@@ -3,7 +3,6 @@ package edu.vanderbilt.cs278.grouppic.client;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.concurrent.Callable;
 import org.magnum.videoup.client.R;
 
@@ -29,7 +27,7 @@ import edu.vanderbilt.cs278.grouppic.repository.Picture;
  *
  * Activity to display the details view of a picture along with the comments for the picture.
  */
-public class PhotoDetailActivity extends Activity {
+public class PictureDetailActivity extends Activity {
 
     ArrayList<Comment> comments;
     ArrayList<String> content;
@@ -55,6 +53,9 @@ public class PhotoDetailActivity extends Activity {
         if (savedInstanceState != null) {
             currentPicture_ = savedInstanceState.getLong("id");
         }
+
+        // Debug Create instance of object even without intent passing a bundle
+        currentPicture_ = 2;
 
         if (currentPicture_ != 0) {
             refreshComments();
@@ -128,7 +129,7 @@ public class PhotoDetailActivity extends Activity {
                                     @Override
                                     public void success(Collection<Comment> result) {
                                         for (Comment c : result) {
-                                            content.add(c.getUser());
+                                            content.add(c.getContent());
                                         }
                                     }
 
@@ -136,7 +137,7 @@ public class PhotoDetailActivity extends Activity {
                                     public void error(Exception e) {
 
                                         Toast.makeText(
-                                                PhotoDetailActivity.this,
+                                                PictureDetailActivity.this,
                                                 "Unable to fetch the video list, please login again.",
                                                 Toast.LENGTH_SHORT).show();
                                     }
