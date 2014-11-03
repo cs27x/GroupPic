@@ -123,9 +123,9 @@ public class Picture {
      *
      * @return A PicturePreview object for the current image
      */
-    public PicturePreview getPreview() {
+   /* public PicturePreview getPreview() {
         return new PicturePreview(this.date, this.sender);
-    }
+    }*/
     
     /**
      * @author Jejo Koola
@@ -133,9 +133,9 @@ public class Picture {
      * 	read bytes
      * @throws IOException 
      */
-    public void setImageFromStream(ImageInputStream imageStream) throws IOException {
+    // public void setImageFromStream(ImageInputStream imageStream) throws IOException {
     //	image = new byte[(int) imageStream.length()];
     //	imageStream.readFully(image);
-    }
+    // }
 
 }

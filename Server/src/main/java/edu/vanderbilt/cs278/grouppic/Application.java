@@ -1,22 +1,21 @@
 package edu.vanderbilt.cs278.grouppic;
 
-import edu.vanderbilt.cs278.grouppic.json.ResourcesMapper;
-
-import org.magnum.mobilecloud.video.repository.Video;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import edu.vanderbilt.cs278.grouppic.repository.*;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import edu.vanderbilt.cs278.grouppic.json.ResourcesMapper;
+import edu.vanderbilt.cs278.grouppic.repository.Picture;
+import edu.vanderbilt.cs278.grouppic.repository.PictureRepository;
 
 //Tell Spring to automatically inject any dependencies that are marked in
 //our classes with @Autowired
@@ -34,7 +33,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 // find any Controllers or other components that are part of our applciation.
 // Any class in this package that is annotated with @Controller is going to be
 // automatically discovered and connected to the DispatcherServlet.
-@ComponentScan(basePackageClasses = {ResourcesMapper.class, Application.class, PictureRepository.class})
+@ComponentScan
 public class Application extends RepositoryRestMvcConfiguration {
 
 	// Tell Spring to launch our app!
