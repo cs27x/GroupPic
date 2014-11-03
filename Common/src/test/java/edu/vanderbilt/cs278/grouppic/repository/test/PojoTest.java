@@ -19,7 +19,6 @@ import com.openpojo.validation.test.impl.SetterTester;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.magnum.mobilecloud.video.repository.Video;
 
 import java.util.List;
 

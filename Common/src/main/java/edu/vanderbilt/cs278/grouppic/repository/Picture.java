@@ -6,6 +6,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 import javax.persistence.ElementCollection;
@@ -19,6 +20,7 @@ import javax.persistence.Id;
  *
  * Basic object for storing information about a picture message
  */
+@Entity
 public class Picture {
 
     @Id
@@ -33,7 +35,7 @@ public class Picture {
     /**
      * Date the picture was sent
      */
-    private long date;
+    private Date date;
 
     /**
      * Collection of strings representing the ids of the recipients
@@ -57,7 +59,7 @@ public class Picture {
 
     }
 
-    public Picture(String sender, long date, Collection<Long> recipients, byte[] image) {
+    public Picture(String sender, Date date, Collection<Long> recipients, byte[] image) {
         this.sender = sender;
         this.date = date;
         this.recipients = recipients;
@@ -76,14 +78,18 @@ public class Picture {
 
     public void setSender(String sender) { this.sender = sender; }
 
-    public long getDate() { return date; }
+    public Date getDate() { return date; }
 
-    public void setDate(long date) { this.date = date; }
+    public void setDate(Date date) { this.date = date; }
 
     public Collection<Long> getRecipients() { return recipients; }
 
     public void setRecipients(Collection<Long> recipients) { this.recipients = recipients; }
 
+    public void setCaptions(Collection<String> captions) { this.captions = captions; }
+    
+    public Collection<String> getCaptions() { return captions; }
+    
     public byte[] getImage() { return image; }
 
     public void setImage(byte[] image) { this.image = image; }
@@ -95,7 +101,7 @@ public class Picture {
      *
      * @return The image in the byte array
      */
-    public BufferedImage getBufferedImage() throws IOException{
+    public BufferedImage createBufferedImage() throws IOException{
         return ImageIO.read(new ByteArrayInputStream(image));
     }
 
@@ -104,7 +110,7 @@ public class Picture {
      *
      * @return A PicturePreview object for the current image
      */
-    public PicturePreview getPreview() {
+    public PicturePreview createPreview() {
         return new PicturePreview(this.date, this.sender);
     }
 
