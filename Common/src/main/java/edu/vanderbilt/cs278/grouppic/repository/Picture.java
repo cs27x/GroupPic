@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 
@@ -18,6 +19,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
+import com.google.common.base.Objects;
+import com.sun.org.apache.xml.internal.security.utils.Base64;
+
 
 /**
  * Created by andrewbachman on 10/27/14.
@@ -61,16 +66,20 @@ public class Picture {
 
     public Picture() { 
     	captions = new ArrayList<Caption>();
+    	recipients = new ArrayList<Long>();
+    	image = new byte[1];
+    	image[0] = 0;
     }
 
-    public Picture(String sender, Date date, Collection<Long> recipients, byte[] image) {
+    public Picture(String sender, Date date, Collection<Long> recipients, Collection<Caption> captions, byte[] image) {
         this.sender = sender;
         this.date = date;
         this.recipients = recipients;
+        this.captions = captions;
         this.image = image;
     }
 
-    public long getId() {
+	public long getId() {
         return id;
     }
 
@@ -120,4 +129,45 @@ public class Picture {
         return new PicturePreview(this.date, this.sender);
     }
 
+	/**
+	 * 
+	 * 
+	 */
+	@Override
+	public int hashCode() {
+		// Google Guava provides great utilities for hashing
+		return Objects.hashCode(sender, date, image, recipients);
+	}
+
+	/**
+	 * Two Videos are considered equal if they have exactly the same values for
+	 * their name, url, and duration.
+	 * 
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof Picture) {
+			Picture other = (Picture) obj;
+			// Google Guava provides great utilities for equals too!
+			boolean sEquals = Objects.equal(sender, other.sender);
+			boolean dEquals =  Objects.equal(date, other.date);
+			boolean iEquals =  Arrays.equals(image, other.image);
+			boolean cEquals =  Arrays.deepEquals(getCaptions().toArray(), other.getCaptions().toArray());
+			boolean rEquals =  Arrays.deepEquals(getRecipients().toArray(), other.getRecipients().toArray());
+			return sEquals & dEquals & iEquals & cEquals & rEquals;
+		} else {
+			return false;
+		}
+	}
+	
+	@Override
+	public String toString() {
+		String ret = "ID: " + this.getId() + 
+					 ", SENDER: " + this.getSender() +
+					 ", RECIPIENTS: " + this.getRecipients().toString() +
+					 ", CAPTIONS: " + this.getCaptions().toString() +
+					 ", DATE: " + this.getDate().toString() +
+					 ", IMAGE: [" + Base64.encode(image) + "]";
+		return ret;
+	}
 }

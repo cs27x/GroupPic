@@ -30,7 +30,7 @@ public interface PictureSvcApi {
     public Collection<Picture> getPictureList();
 
     @POST(PICTURE_PATH)
-    public void sendPicture(@Body Picture p);
+    public Void sendPicture(@Body Picture p);
 
     @GET(PICTURE_PATH + "/{id}")
     public Picture getPictureWithId(@Path("id") long id);
@@ -39,9 +39,9 @@ public interface PictureSvcApi {
     public Collection<Caption> getComments(@Path("id") long id);
 
     @POST(POST_COMMENT_PATH)
-    public void postComment(@Body Caption c);
+    public Void postComment(@Body Caption c);
     
     @DELETE(PICTURE_PATH + "/{id}")
-    public void deletePicture(@Path("id") long id);
+    public Void deletePicture(@Path("id") long id);
 
 }

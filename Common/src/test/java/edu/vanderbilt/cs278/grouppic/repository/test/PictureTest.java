@@ -19,7 +19,7 @@ public class PictureTest {
     // TODO: Add tests for the images in the Picture class add actual picture to byte array
     private final Date date = new Date();
     private final Picture picture = new Picture("Test User", date,
-            new ArrayList(), new byte[10]);
+            new ArrayList(), new ArrayList(), new byte[10]);
 
     @Test
     public void testToPreview() {

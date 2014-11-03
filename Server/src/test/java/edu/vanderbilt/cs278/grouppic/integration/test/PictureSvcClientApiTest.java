@@ -22,12 +22,23 @@ import org.magnum.mobilecloud.video.TestUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+import com.google.gson.JsonSerializationContext;
+import com.google.gson.JsonSerializer;
+import com.google.gson.JsonPrimitive;
 
 import edu.vanderbilt.cs278.grouppic.repository.Picture;
+import edu.vanderbilt.cs278.grouppic.repository.Caption;
 import edu.vanderbilt.cs278.grouppic.client.PictureSvcApi;
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.converter.GsonConverter;
+
+
+import java.lang.reflect.Type;
 
 /**
  * 
@@ -40,7 +51,27 @@ import retrofit.converter.GsonConverter;
 public class PictureSvcClientApiTest extends TestCase {
 
 	private final static String TEST_URL = "http://localhost:8080";
-	private static final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ").create();
+	private static final Gson gson = new GsonBuilder()
+		.setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+		//.registerTypeHierarchyAdapter(byte[].class, typeAdapter)
+		.create();
+	
+	/**
+	 * This class to handle byte streams is taken from: https://gist.github.com/orip/3635246
+	 * @author Ori Peleg
+	 *
+	 */
+	/*
+	  private static class ByteArrayToBase64TypeAdapter implements JsonSerializer<byte[]>, JsonDeserializer<byte[]> {
+        public byte[] deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+            return Base64.decode(json.getAsString(), Base64.NO_WRAP);
+        }
+
+        public JsonElement serialize(byte[] src, Type typeOfSrc, JsonSerializationContext context) {
+            return new JsonPrimitive(Base64.encodeToString(src, Base64.NO_WRAP));
+        }
+    }
+    */
 	
 	private static final PictureSvcApi picService = new RestAdapter.Builder()
 			.setEndpoint(TEST_URL)
@@ -53,7 +84,7 @@ public class PictureSvcClientApiTest extends TestCase {
 	private static final String TEST_IMAGE_2 = "jacksonasdfasdf-poster.jpg";
 
 	private Picture pic;
-	private byte[] pretendImageData = {0xA, 0xA, 0xA, 0xB, 0xB, 0xB, 0xC, 0xC, 0xC, 0xD};
+	private byte[] pretendImageData = {0, 0, 0, 1, 1, 1, 2, 2, 2, 3};
 	
 	/**
 	 * @author Jejo Koola
@@ -66,7 +97,7 @@ public class PictureSvcClientApiTest extends TestCase {
 		if (is == null) {
 			throw new IOException("Could not open image file: " + TEST_IMAGE_1);
 		}*/	
-		pic = new Picture("test sender", new Date(), new ArrayList<Long>(), null );
+		pic = new Picture("test sender", new Date(), new ArrayList<Long>(), new ArrayList<Caption>(), pretendImageData );
 		// ImageInputStream iis = ImageIO.createImageInputStream(is);
 		// System.out.println(iis.length());
 		// pic.setImageFromStream(iis);
@@ -90,6 +121,11 @@ public class PictureSvcClientApiTest extends TestCase {
 		// We should get back the pic that we added above
 		Collection<Picture> pics = picService.getPictureList();
 		assertTrue(pics.size() > 0);
+		
+		System.err.println("ORIGINAL: " + pic.toString());
+		for (Picture pic: pics) {
+			System.err.println(pic.toString());
+		}
 		assertTrue(pics.contains(pic));
 		
 		for(Picture v : pics){
