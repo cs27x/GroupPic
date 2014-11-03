@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * Created by andrewbachman on 10/28/14.
@@ -11,7 +13,7 @@ import javax.persistence.Id;
  * Class to store the information for a
  */
 @Entity
-public class Comment {
+public class Caption {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,7 +22,17 @@ public class Comment {
     private String user;
     private int votes;
     private String content;
-
+    
+    @ManyToOne
+    //@JoinColumn(name = "picture_id")
+    private Picture picture;
+    
+    public Caption() { user = new String(""); content = new String(""); }
+    
+    public Caption(String content) {
+    	this.content = content;
+    }
+    
     public long getId() {
         return id;
     }
@@ -40,6 +52,10 @@ public class Comment {
     public String getContent() { return content; }
 
     public void setContent(String content) { this.content = content; }
+    
+    public void setPicture(Picture pic) { this.picture = pic; }
+    
+    public Picture getPicture() { return picture; }
 
     public void upvote() { ++votes; }
     public void downvote() { --votes; }

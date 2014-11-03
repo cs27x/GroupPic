@@ -14,6 +14,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import edu.vanderbilt.cs278.grouppic.json.ResourcesMapper;
+import edu.vanderbilt.cs278.grouppic.repository.Caption;
+import edu.vanderbilt.cs278.grouppic.repository.CaptionRepository;
 import edu.vanderbilt.cs278.grouppic.repository.Picture;
 import edu.vanderbilt.cs278.grouppic.repository.PictureRepository;
 
@@ -22,7 +24,7 @@ import edu.vanderbilt.cs278.grouppic.repository.PictureRepository;
 @EnableAutoConfiguration
 // Tell Spring to automatically create a JPA implementation of our
 // VideoRepository
-@EnableJpaRepositories(basePackageClasses = PictureRepository.class)
+@EnableJpaRepositories(basePackageClasses = {PictureRepository.class, CaptionRepository.class})
 // Tell Spring to turn on WebMVC (e.g., it should enable the DispatcherServlet
 // so that requests can be routed to our Controllers)
 @EnableWebMvc
@@ -59,24 +61,24 @@ public class Application extends RepositoryRestMvcConfiguration {
 	//
 	// See the ResourcesMapper class for more details.
 	
-	@Autowired
+	/*@Autowired
 	private ObjectMapper myObjectMapper;
-	@Bean
+	@Bean*/
 	@Override	
 	public ObjectMapper halObjectMapper() {
 		return new ResourcesMapper();
 	}
 	
-	@Bean
+	/*@Bean
 	@Override
 	public ObjectMapper objectMapper() {
 		return new ResourcesMapper();
-	}
+	}*/
 
 	@Override
 	protected void configureRepositoryRestConfiguration(
 			RepositoryRestConfiguration config) {
-		config.exposeIdsFor(Picture.class);
+		config.exposeIdsFor(Picture.class, Caption.class );
 	}
 
 }

@@ -9,11 +9,15 @@ import java.util.Collection;
 import java.util.Date;
 
 import javax.imageio.ImageIO;
+import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 
 /**
  * Created by andrewbachman on 10/27/14.
@@ -46,8 +50,8 @@ public class Picture {
     /**
      * Either a string of the id of captions, or a change to a list of caption objects
      */
-    @ElementCollection
-    private Collection<String> captions;
+    @OneToMany(cascade = CascadeType.ALL)
+    private Collection<Caption> captions;
 
     /**
      * Byte array storing the image.
@@ -55,8 +59,8 @@ public class Picture {
      */
     private byte[] image;
 
-    public Picture() {
-
+    public Picture() { 
+    	captions = new ArrayList<Caption>();
     }
 
     public Picture(String sender, Date date, Collection<Long> recipients, byte[] image) {
@@ -86,9 +90,11 @@ public class Picture {
 
     public void setRecipients(Collection<Long> recipients) { this.recipients = recipients; }
 
-    public void setCaptions(Collection<String> captions) { this.captions = captions; }
+    public void setCaptions(Collection<Caption> captions) { this.captions = captions; }
     
-    public Collection<String> getCaptions() { return captions; }
+    public void addCaption(Caption caption) { captions.add(caption); caption.setPicture(this); }
+    
+    public Collection<Caption> getCaptions() { return captions; }
     
     public byte[] getImage() { return image; }
 

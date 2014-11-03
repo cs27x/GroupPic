@@ -56,7 +56,7 @@ public class PojoTest {
         pojoValidator.addRule(new SetterMustExistRule());
 
         // Create Testers to validate behaviour for POJO_PACKAGE
-        pojoValidator.addTester(new DefaultValuesNullTester());
+        // pojoValidator.addTester(new DefaultValuesNullTester());
         pojoValidator.addTester(new SetterTester());
         pojoValidator.addTester(new GetterTester());
     }

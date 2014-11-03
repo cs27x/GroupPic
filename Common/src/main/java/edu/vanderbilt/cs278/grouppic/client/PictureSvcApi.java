@@ -2,7 +2,7 @@ package edu.vanderbilt.cs278.grouppic.client;
 
 import java.util.Collection;
 
-import edu.vanderbilt.cs278.grouppic.repository.Comment;
+import edu.vanderbilt.cs278.grouppic.repository.Caption;
 import edu.vanderbilt.cs278.grouppic.repository.Picture;
 import edu.vanderbilt.cs278.grouppic.repository.PicturePreview;
 
@@ -36,10 +36,10 @@ public interface PictureSvcApi {
     public Picture getPictureWithId(@Path("id") long id);
 
     @GET(PICTURE_PATH + "/{id}" + COMMENT_PATH)
-    public Collection<Comment> getComments(@Path("id") long id);
+    public Collection<Caption> getComments(@Path("id") long id);
 
     @POST(POST_COMMENT_PATH)
-    public void postComment(@Body Comment c);
+    public void postComment(@Body Caption c);
     
     @DELETE(PICTURE_PATH + "/{id}")
     public void deletePicture(@Path("id") long id);
