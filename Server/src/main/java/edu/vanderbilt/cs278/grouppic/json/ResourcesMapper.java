@@ -3,6 +3,7 @@ package edu.vanderbilt.cs278.grouppic.json;
 import java.io.IOException;
 
 import org.springframework.hateoas.Resources;
+import org.springframework.hateoas.Resource;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -73,6 +74,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
  * @author jules
  *
  */
+
 public class ResourcesMapper extends ObjectMapper {
 
 	// This anonymous inner class will handle conversion of the Spring Data Rest
@@ -91,6 +93,31 @@ public class ResourcesMapper extends ObjectMapper {
 		public void serialize(Resources value, JsonGenerator jgen,
 				SerializerProvider provider) throws IOException,
 				JsonProcessingException {
+			int x = 1/0;
+			// Extracted the actual data inside of the Resources object
+			// that we care about (e.g., the list of Video objects)
+			Object content = value.getContent();
+			// Instead of all of the Resources member variables, etc.
+			// Just mashall the actual content (Videos) into the JSON
+			JsonSerializer<Object> s = provider.findValueSerializer(
+					content.getClass(), null);
+			s.serialize(content, jgen, provider);
+		}
+	};
+	private JsonSerializer<Resource> serializer2 = new JsonSerializer<Resource>() {
+
+		// We are going to register this class to handle all instances of type
+		// Resources
+		@Override
+		public Class<Resource> handledType() {
+			return Resource.class;
+		}
+
+		@Override
+		public void serialize(Resource value, JsonGenerator jgen,
+				SerializerProvider provider) throws IOException,
+				JsonProcessingException {
+			int x = 1/0;
 			// Extracted the actual data inside of the Resources object
 			// that we care about (e.g., the list of Video objects)
 			Object content = value.getContent();
@@ -105,8 +132,12 @@ public class ResourcesMapper extends ObjectMapper {
 	// Create an ObjectMapper and tell it to use our customer serializer
 	// to convert Resources objects into JSON
 	public ResourcesMapper() {
+		
 		SimpleModule module = new SimpleModule();
+		module.addSerializer(Resources.class, serializer);
+		module.addSerializer(Resource.class, serializer2);
 		module.addSerializer(serializer);
+		module.addSerializer(serializer2);
 		registerModule(module);
 	}
 
