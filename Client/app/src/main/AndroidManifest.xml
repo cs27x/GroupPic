@@ -40,6 +40,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="edu.vanderbilt.cs278.grouppic.client.PicturePostActivity"
+            android:label="Send Picture"
+            android:parentActivityName="edu.vanderbilt.cs278.grouppic.client.MainListView">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.vanderbilt.cs278.grouppic.client.MainListView" />
+        </activity>
     </application>
 
 </manifest>

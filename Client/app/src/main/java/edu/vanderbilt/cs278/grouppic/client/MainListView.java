@@ -76,6 +76,10 @@ public class MainListView extends Activity {
         if (id == R.id.action_settings) {
             return true;
         }
+        if (id == R.id.new_picture) {
+            Intent intent = new Intent(getBaseContext(), PicturePostActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 

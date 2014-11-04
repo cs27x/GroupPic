@@ -1,7 +1,11 @@
-package org.magnum.videoup;
+package edu.vanderbilt.cs278.grouppic.client;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.Callable;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -17,22 +21,33 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
+import org.magnum.videoup.client.R;
+
+
+import butterknife.ButterKnife;
+import butterknife.InjectView;
+import edu.vanderbilt.cs278.grouppic.repository.Caption;
+import edu.vanderbilt.cs278.grouppic.repository.Picture;
 
 public class PicturePostActivity extends Activity {
 	private static final int PHOTO_REQUEST_CODE = 20;
 	private boolean hasSelectedPhoto = false;
-	private ListView friendList;
-	private ImageView picture;
+    private Bitmap currentImage;
+
+    @InjectView(R.id.lv_friend_list)
+	protected ListView friendList;
+
+    @InjectView(R.id.iv_selected_image)
+	protected ImageView picture;
 	
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_picture_post);
-		
-		
-		friendList = (ListView) findViewById(R.id.lv_friend_list);
-		picture = (ImageView) findViewById(R.id.iv_selected_image);
+
+
+        ButterKnife.inject(this);
 		
 		String[] friends = {"My Friends"};
 		
@@ -55,6 +70,32 @@ public class PicturePostActivity extends Activity {
 			return;
 		}
 		Log.d("PicPostAct", "SEND");
+        final PictureSvcApi svc = PictureSvc.getOrShowLogin(this);
+
+        if (svc != null) {
+            CallableTask.invoke(new Callable<Void>() {
+                @Override
+                public Void call() throws Exception {
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                    currentImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    byte[] byteArray = stream.toByteArray();
+                    Picture p = new Picture("Current Test User", new Date(), new ArrayList<Long>(),
+                            new ArrayList<Caption>(), byteArray);
+                    svc.sendPicture(p);
+                    return null;
+                }
+            }, new TaskCallback<Void>() {
+                @Override
+                public void success(Void v) {
+                    Log.d("Success", "Added Picture");
+                }
+
+                @Override
+                public void error(Exception e) {
+
+                }
+            });
+        }
 		finish();
 	}
 	
@@ -66,6 +107,7 @@ public class PicturePostActivity extends Activity {
 				try {
 					InputStream imageStream = getContentResolver().openInputStream(image);
 					Bitmap myImage = BitmapFactory.decodeStream(imageStream);
+                    currentImage = myImage;
 					picture.setImageBitmap(myImage);
 					hasSelectedPhoto = true;
 				} catch (FileNotFoundException e) {
