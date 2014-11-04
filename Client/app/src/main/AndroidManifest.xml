@@ -17,12 +17,11 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="edu.vanderbilt.cs278.grouppic.client.PictureDetailActivity"
-            android:label="@string/title_activity_photo_detail" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:label="@string/title_activity_photo_detail"
+            android:parentActivityName="edu.vanderbilt.cs278.grouppic.client.MainListView">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.vanderbilt.cs278.grouppic.client.MainListView" />
         </activity>
         <activity
             android:name=".LoginScreenActivity"
@@ -32,7 +31,15 @@
             android:name=".VideoListActivity"
             android:label="@string/title_activity_video_list" >
         </activity>
+        <activity
+            android:name="edu.vanderbilt.cs278.grouppic.client.MainListView"
+            android:label="@string/title_activity_main_list_view" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

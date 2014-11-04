@@ -46,12 +46,14 @@ public class PictureSvc {
 
         // This section is commented out for testing purposes
         // When the server is running it should be replaced
+        /*
         pictureSvc_ = new RestAdapter.Builder().setEndpoint(SERVER)
                 .setLogLevel(RestAdapter.LogLevel.FULL).build()
                 .create(PictureSvcApi.class);
+                */
 
 
-       // pictureSvc_ = new TestPictureSvcApi(); // This is an implementation of the API interface for testing
+        pictureSvc_ = new TestPictureSvcApi(); // This is an implementation of the API interface for testing
         Log.d("TEST API", "CREATED");
         return pictureSvc_;
     }

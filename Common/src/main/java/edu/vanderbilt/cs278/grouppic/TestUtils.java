@@ -29,7 +29,7 @@ public class TestUtils {
         return comments;
     }
 
-    public static Picture getRandPicture() {
+    synchronized public static Picture getRandPicture() {
         int user = ((int)  Math.rint(Math.random() * 10)) % USERS.length;
         int img = ((int)  Math.rint(Math.random() * 10)) % imgResources.length;
 
@@ -46,7 +46,7 @@ public class TestUtils {
         return new Picture(USERS[user], new Date(), new ArrayList<Long>(), new ArrayList<Caption>(), i);
     }
 
-    private static byte[] readBytes(InputStream inputStream) throws IOException {
+    synchronized private static byte[] readBytes(InputStream inputStream) throws IOException {
         // this dynamically extends to take the bytes you read
         ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
 

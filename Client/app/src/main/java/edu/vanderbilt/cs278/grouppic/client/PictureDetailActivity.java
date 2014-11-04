@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -48,14 +49,14 @@ public class PictureDetailActivity extends Activity {
 
         ButterKnife.inject(this);
 
-        img_.setImageResource(R.drawable.android_wallpaper);
+        // img_.setImageResource(R.drawable.android_wallpaper);
 
-        if (savedInstanceState != null) {
-            currentPicture_ = savedInstanceState.getLong("id");
-        }
+        currentPicture_ = getIntent().getExtras().getLong("picture_id");
+
+        Log.d("ID", "Current Picture ID " + currentPicture_);
 
         // Debug Create instance of object even without intent passing a bundle
-        currentPicture_ = 2;
+        // currentPicture_ = 2;
 
         if (currentPicture_ != 0) {
             refreshCaptions();
@@ -102,6 +103,7 @@ public class PictureDetailActivity extends Activity {
             }, new TaskCallback<Picture>() {
                 @Override
                 public void success(Picture result) {
+                    Log.d("picture", result.toString());
                     byte[] img = result.getImage();
                     Bitmap bmp = BitmapFactory.decodeByteArray(img, 0 , img.length);
 
