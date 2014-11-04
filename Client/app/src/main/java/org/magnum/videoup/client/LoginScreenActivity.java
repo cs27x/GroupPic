@@ -10,9 +10,6 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.magnum.mobilecloud.video.client.VideoSvcApi;
-import org.magnum.mobilecloud.video.repository.Video;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -31,6 +28,7 @@ import edu.vanderbilt.cs278.grouppic.client.TaskCallback;
  * 
  */
 public class LoginScreenActivity extends Activity {
+    /*
 
 	@InjectView(R.id.userName)
 	protected EditText userName_;
@@ -85,5 +83,6 @@ public class LoginScreenActivity extends Activity {
             }
         });
 	}
+	*/
 
 }

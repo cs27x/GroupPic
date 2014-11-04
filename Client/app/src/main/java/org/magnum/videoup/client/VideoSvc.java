@@ -6,7 +6,7 @@
  */
 package org.magnum.videoup.client;
 
-import org.magnum.mobilecloud.video.client.VideoSvcApi;
+// import org.magnum.mobilecloud.video.client.VideoSvcApi;
 
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
@@ -14,7 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 
 public class VideoSvc {
-
+/*
 	private static VideoSvcApi videoSvc_;
 
 	public static synchronized VideoSvcApi getOrShowLogin(Context ctx) {
@@ -37,4 +37,5 @@ public class VideoSvc {
 
 		return videoSvc_;
 	}
+	*/
 }

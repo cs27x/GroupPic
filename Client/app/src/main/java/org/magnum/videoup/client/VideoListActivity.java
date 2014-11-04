@@ -12,15 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.magnum.mobilecloud.video.client.VideoSvcApi;
-import org.magnum.mobilecloud.video.repository.Video;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import edu.vanderbilt.cs278.grouppic.client.CallableTask;
 import edu.vanderbilt.cs278.grouppic.client.TaskCallback;
 
 public class VideoListActivity extends Activity {
+    /*
 
 	@InjectView(R.id.videoList)
 	protected ListView videoList_;
@@ -76,5 +74,6 @@ public class VideoListActivity extends Activity {
             });
 		}
 	}
+	*/
 
 }

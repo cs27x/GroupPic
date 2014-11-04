@@ -19,7 +19,7 @@ import java.util.Collection;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
-import edu.vanderbilt.cs278.grouppic.repository.Comment;
+import edu.vanderbilt.cs278.grouppic.repository.Caption;
 import edu.vanderbilt.cs278.grouppic.repository.Picture;
 
 /**
@@ -29,7 +29,7 @@ import edu.vanderbilt.cs278.grouppic.repository.Picture;
  */
 public class PictureDetailActivity extends Activity {
 
-    ArrayList<Comment> comments;
+    ArrayList<Caption> comments;
     ArrayList<String> content;
     ArrayAdapter<String> listViewAdapter;
 
@@ -58,7 +58,7 @@ public class PictureDetailActivity extends Activity {
         currentPicture_ = 2;
 
         if (currentPicture_ != 0) {
-            refreshComments();
+            refreshCaptions();
             getCurrentPicture();
         }
 
@@ -116,19 +116,19 @@ public class PictureDetailActivity extends Activity {
         }
     }
 
-    private void refreshComments() {
+    private void refreshCaptions() {
         final PictureSvcApi svc = PictureSvc.getOrShowLogin(this);
 
         if (svc != null) {
-            CallableTask.invoke(new Callable<Collection<Comment>>() {
+            CallableTask.invoke(new Callable<Collection<Caption>>() {
                                     @Override
-                                    public Collection<Comment> call() throws Exception {
+                                    public Collection<Caption> call() throws Exception {
                                         return svc.getComments(currentPicture_);
                                     }
-                                }, new TaskCallback<Collection<Comment>>() {
+                                }, new TaskCallback<Collection<Caption>>() {
                                     @Override
-                                    public void success(Collection<Comment> result) {
-                                        for (Comment c : result) {
+                                    public void success(Collection<Caption> result) {
+                                        for (Caption c : result) {
                                             content.add(c.getContent());
                                         }
                                     }

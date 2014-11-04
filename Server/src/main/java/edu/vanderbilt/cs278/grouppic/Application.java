@@ -1,10 +1,9 @@
-package org.magnum.mobilecloud.video;
+package edu.vanderbilt.cs278.grouppic;
 
-import org.magnum.mobilecloud.video.json.ResourcesMapper;
-import org.magnum.mobilecloud.video.repository.Video;
-import org.magnum.mobilecloud.video.repository.VideoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -14,12 +13,18 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import edu.vanderbilt.cs278.grouppic.json.ResourcesMapper;
+import edu.vanderbilt.cs278.grouppic.repository.Caption;
+import edu.vanderbilt.cs278.grouppic.repository.CaptionRepository;
+import edu.vanderbilt.cs278.grouppic.repository.Picture;
+import edu.vanderbilt.cs278.grouppic.repository.PictureRepository;
+
 //Tell Spring to automatically inject any dependencies that are marked in
 //our classes with @Autowired
 @EnableAutoConfiguration
 // Tell Spring to automatically create a JPA implementation of our
 // VideoRepository
-@EnableJpaRepositories(basePackageClasses = VideoRepository.class)
+@EnableJpaRepositories(basePackageClasses = {PictureRepository.class, CaptionRepository.class})
 // Tell Spring to turn on WebMVC (e.g., it should enable the DispatcherServlet
 // so that requests can be routed to our Controllers)
 @EnableWebMvc
@@ -55,15 +60,25 @@ public class Application extends RepositoryRestMvcConfiguration {
 	// client.
 	//
 	// See the ResourcesMapper class for more details.
-	@Override
+	
+	/*@Autowired
+	private ObjectMapper myObjectMapper;
+	@Bean*/
+	@Override	
 	public ObjectMapper halObjectMapper() {
 		return new ResourcesMapper();
 	}
+	
+	/*@Bean
+	@Override
+	public ObjectMapper objectMapper() {
+		return new ResourcesMapper();
+	}*/
 
 	@Override
 	protected void configureRepositoryRestConfiguration(
 			RepositoryRestConfiguration config) {
-		config.exposeIdsFor(Video.class);
+		config.exposeIdsFor(Picture.class, Caption.class );
 	}
 
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import edu.vanderbilt.cs278.grouppic.TestUtils;
-import edu.vanderbilt.cs278.grouppic.repository.Comment;
+import edu.vanderbilt.cs278.grouppic.repository.Caption;
 import edu.vanderbilt.cs278.grouppic.repository.Picture;
 import edu.vanderbilt.cs278.grouppic.repository.PicturePreview;
 
@@ -16,8 +16,8 @@ import edu.vanderbilt.cs278.grouppic.repository.PicturePreview;
  */
 public class TestPictureSvcApi implements PictureSvcApi {
 
-    public Collection<PicturePreview> getPictureList() {
-        return new ArrayList<PicturePreview>();
+    public Collection<Picture> getPictureList() {
+        return new ArrayList<Picture>();
     }
 
     public void sendPicture(Picture p) {
@@ -29,13 +29,15 @@ public class TestPictureSvcApi implements PictureSvcApi {
         return TestUtils.getRandPicture();
     }
 
-    public Collection<Comment> getComments(long id) {
+    public Collection<Caption> getComments(long id) {
         System.out.println("TestAPI::Called getComments");
         return TestUtils.getComments();
     }
 
-    public void postComment(Comment c) {
+    public void postComment(Caption c) {
 
     }
+
+    public void deletePicture(long id) {}
 
 }

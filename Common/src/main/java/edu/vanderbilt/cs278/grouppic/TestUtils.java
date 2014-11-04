@@ -20,10 +20,10 @@ public class TestUtils {
             "https://developers.google.com/android/images/index_landing_page.png"
     };
 
-    public static ArrayList<Comment> getComments() {
-        ArrayList<Comment> comments = new ArrayList<Comment>();
+    public static ArrayList<Caption> getComments() {
+        ArrayList<Caption> comments = new ArrayList<Caption>();
         for (int i = 0; i < USERS.length; ++i) {
-            Comment c = new Comment(USERS[i], "Test Comment " + i);
+            Caption c = new Caption(USERS[i], "Test Comment " + i);
             comments.add(c);
         }
         return comments;
@@ -43,7 +43,7 @@ public class TestUtils {
         } catch (Exception e) {
         }
 
-        return new Picture(USERS[user], new Date().getTime(), new ArrayList<Long>(), i);
+        return new Picture(USERS[user], new Date(), new ArrayList<Long>(), new ArrayList<Caption>(), i);
     }
 
     private static byte[] readBytes(InputStream inputStream) throws IOException {

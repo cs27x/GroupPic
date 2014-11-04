@@ -1,8 +1,11 @@
-package org.magnum.mobilecloud.video.json;
+package edu.vanderbilt.cs278.grouppic.json;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.springframework.hateoas.Resources;
+import org.springframework.hateoas.Resource;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -73,6 +76,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
  * @author jules
  *
  */
+
 public class ResourcesMapper extends ObjectMapper {
 
 	// This anonymous inner class will handle conversion of the Spring Data Rest
@@ -91,6 +95,7 @@ public class ResourcesMapper extends ObjectMapper {
 		public void serialize(Resources value, JsonGenerator jgen,
 				SerializerProvider provider) throws IOException,
 				JsonProcessingException {
+			
 			// Extracted the actual data inside of the Resources object
 			// that we care about (e.g., the list of Video objects)
 			Object content = value.getContent();
@@ -102,11 +107,57 @@ public class ResourcesMapper extends ObjectMapper {
 		}
 	};
 	
+	/**
+	 * @author Jejo Koola
+	 * I added a custom date serializer so that dates weren't just time since epoch
+	 */
+	private JsonSerializer<Date> dateSerializer = new JsonSerializer<Date>() {
+		private final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+		@Override
+		public Class<Date> handledType() {
+			return Date.class;
+		}
+		
+		@Override
+		public void serialize(Date value, JsonGenerator jgen,
+				SerializerProvider provider) throws IOException,
+				JsonProcessingException {
+			
+			String content = dateFormat.format(value);
+			JsonSerializer<Object> s = provider.findValueSerializer(
+					content.getClass(), null);
+			s.serialize(content, jgen, provider);
+		}
+	};
+	
+	private JsonSerializer<byte[]> byteArraySerializer = new JsonSerializer<byte[]>() {
+		@Override
+		public Class<byte[]> handledType() {
+			return byte[].class;
+		}
+		
+		@Override
+		public void serialize(byte[] value, JsonGenerator jgen,
+				SerializerProvider provider) throws IOException,
+				JsonProcessingException {
+			
+			jgen.writeStartArray();
+			for (byte b: value) {
+				jgen.writeNumber(b);
+			}
+			jgen.writeEndArray();			
+		}
+	};
+	
+	
 	// Create an ObjectMapper and tell it to use our customer serializer
 	// to convert Resources objects into JSON
 	public ResourcesMapper() {
+		
 		SimpleModule module = new SimpleModule();
-		module.addSerializer(serializer);
+		module.addSerializer(serializer);	
+		module.addSerializer(dateSerializer);
+		module.addSerializer(byteArraySerializer);
 		registerModule(module);
 	}
 
