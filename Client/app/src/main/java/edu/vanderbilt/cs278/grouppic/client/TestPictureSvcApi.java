@@ -38,13 +38,14 @@ public class TestPictureSvcApi implements PictureSvcApi {
     }
 
     public void sendPicture(Picture p) {
+        p.setId(pictures.size() + 100);
         pictures.add(p);
     }
 
     public Picture getPictureWithId(long id) {
         System.out.println("TestAPI::Called Get Picture with id");
         for (Picture p : pictures) {
-            if (p.getId() == id && p.getId() > 10) {
+            if (p.getId() == id && p.getId() > 100) {
                 Log.d("Get Picture", "Found Picture with Id: " + p.toString());
                 return p;
             }
