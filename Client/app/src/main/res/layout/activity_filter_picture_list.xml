@@ -1,0 +1,39 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <Spinner
+            android:id="@+id/filter_option"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/filter_options" />
+
+        <LinearLayout
+            android:id="@+id/sender_option"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:orientation="vertical" >
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/sender_text" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/filter_pictures_done_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="filterPicturesDoneButtonClick"
+            android:text="@string/done" />
+
+    </LinearLayout>
+
+</ScrollView>

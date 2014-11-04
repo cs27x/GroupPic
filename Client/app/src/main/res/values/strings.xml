@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">VideoClient</string>
+    <string name="app_name">GroupPic</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="userName">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
-    <string name="server">Server IP or Hostname</string>
-    <string name="localhost">https://10.0.2.2:8443</string>
-    <string name="title_activity_video_list">VideoListActivity</string>
+    <string name="add_picture">Add Picture</string>
+    <string name="filter_pictures">Filter Pictures</string>
+    <string name="empty">Empty</string>
+    <string name="done">Done</string>
+
+    <string-array name="filter_options">
+        <item>Reset Filters</item>
+        <item>By Sender</item>
+        <item>By Date</item>
+    </string-array>
+
 
 </resources>

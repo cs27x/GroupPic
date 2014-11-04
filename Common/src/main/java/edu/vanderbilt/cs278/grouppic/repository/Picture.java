@@ -19,7 +19,7 @@ import javax.persistence.Id;
  *
  * Basic object for storing information about a picture message
  */
-public class Picture {
+public class Picture implements Comparable<Picture> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -93,7 +93,12 @@ public class Picture {
 
     public void setImage(byte[] image) { this.image = image; }
 
-
+    public int compareTo(Picture p){
+        if(this.getDate() < p.getDate())
+            return -1;
+        else
+            return 1;
+    }
 
     /**
      * @author andrewbachman

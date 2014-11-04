@@ -3,8 +3,6 @@ package edu.vanderbilt.cs278.grouppic.client;
 import android.content.Context;
 import android.content.Intent;
 
-import org.magnum.mobilecloud.video.client.VideoSvcApi;
-import org.magnum.videoup.client.LoginScreenActivity;
 
 import retrofit.RestAdapter;
 
