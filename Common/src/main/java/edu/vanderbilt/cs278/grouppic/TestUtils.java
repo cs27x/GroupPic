@@ -17,7 +17,8 @@ public class TestUtils {
     private static final String[] USERS = new String[]{"user1", "user2", "user3", "user4"};
     public static final String[] imgResources = new String[] {
             "http://www.digitaltrends.com/wp-content/uploads/2011/04/Google-Android.png",
-            "https://developers.google.com/android/images/index_landing_page.png"
+            "https://developers.google.com/android/images/index_landing_page.png",
+            "http://upload.wikimedia.org/wikipedia/commons/1/12/Vanderbilt_Stadium.jpg"
     };
 
     public static ArrayList<Caption> getComments() {
