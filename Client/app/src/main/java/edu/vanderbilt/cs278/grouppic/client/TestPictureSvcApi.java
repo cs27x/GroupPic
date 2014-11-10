@@ -37,9 +37,10 @@ public class TestPictureSvcApi implements PictureSvcApi {
         return pictures;
     }
 
-    public void sendPicture(Picture p) {
+    public Picture sendPicture(Picture p) {
         p.setId(pictures.size() + 100);
         pictures.add(p);
+        return p;
     }
 
     public Picture getPictureWithId(long id) {
@@ -60,10 +61,10 @@ public class TestPictureSvcApi implements PictureSvcApi {
         return TestUtils.getComments();
     }
 
-    public void postComment(Caption c) {
-
+    public Caption postCaption(Caption c) {
+        return new Caption();
     }
 
-    public void deletePicture(long id) {}
+    public Void deletePicture(long id) { return null; }
 
 }

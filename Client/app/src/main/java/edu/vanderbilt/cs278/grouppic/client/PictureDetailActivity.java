@@ -59,7 +59,7 @@ public class PictureDetailActivity extends Activity {
         // currentPicture_ = 2;
 
         if (currentPicture_ != 0) {
-            refreshCaptions();
+            // refreshCaptions();
             getCurrentPicture();
         }
 

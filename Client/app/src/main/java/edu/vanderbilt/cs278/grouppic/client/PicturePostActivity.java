@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 import java.util.concurrent.Callable;
 
 import android.app.Activity;
@@ -73,21 +74,24 @@ public class PicturePostActivity extends Activity {
         final PictureSvcApi svc = PictureSvc.getOrShowLogin(this);
 
         if (svc != null) {
-            CallableTask.invoke(new Callable<Void>() {
+
+            CallableTask.invoke(new Callable<Picture>() {
                 @Override
-                public Void call() throws Exception {
+                public Picture call() throws Exception {
+                    Random r = new Random();
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    currentImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    // currentImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
                     byte[] byteArray = stream.toByteArray();
                     Picture p = new Picture("Current Test User", new Date(), new ArrayList<Long>(),
                             new ArrayList<Caption>(), byteArray);
-                    svc.sendPicture(p);
-                    return null;
+                    p.setId(r.nextLong());
+                    Log.d("Send Picture", p.toString() + " id: " + p.getId());
+                    return svc.sendPicture(p);
                 }
-            }, new TaskCallback<Void>() {
+            }, new TaskCallback<Picture>() {
                 @Override
-                public void success(Void v) {
-                    Log.d("Success", "Added Picture");
+                public void success(Picture v) {
+                    // Log.d("Success", "Added Picture " + v.toString());
                 }
 
                 @Override
