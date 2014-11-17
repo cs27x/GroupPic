@@ -74,12 +74,12 @@ public class UserSvcClientApiTest {
 			
 		assertTrue(users.contains(user1));
 			
-		for(User u : users)
-		{
-			userService.deleterUser(u.getUsername());
-		}
-		
-		assertEquals(0, users.size());	
+//		for(User u : users)
+//		{
+//			userService.deleteUser(u.getId());
+//		}
+//		
+//		assertEquals(0, users.size());	
 	}
 		
 		

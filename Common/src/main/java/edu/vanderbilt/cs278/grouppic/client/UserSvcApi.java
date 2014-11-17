@@ -9,6 +9,7 @@ import retrofit.http.GET;
 import retrofit.http.POST;
 import retrofit.http.Path;
 import retrofit.http.DELETE;
+import retrofit.client.Response;
 
 /**
  * Created by Ethan Dixius on 11/16/14.
@@ -27,9 +28,9 @@ public interface UserSvcApi {
 	public User getUserWithUsername(@Path("username") String username);
 	
 	@POST(USER_PATH)
-	public void createUser(@Body User u);
+	public Response createUser(@Body User u);
 	
-	@DELETE(USER_PATH + "/{username}")
-	public void deleterUser(@Path("username") String username);
+//	@DELETE(USER_PATH + "/{id}")
+//	public Response deleteUser(@Path("id") long id);
 	
 }
