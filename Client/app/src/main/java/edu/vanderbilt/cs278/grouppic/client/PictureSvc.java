@@ -19,6 +19,7 @@ import com.google.gson.GsonBuilder;
 public class PictureSvc {
 
     public static final String SERVER = "http://192.168.56.1:8080";
+
     private static final Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
             .create();
@@ -42,14 +43,14 @@ public class PictureSvc {
         // This section is commented out for testing purposes
         // When the server is running it should be replaced
 
-
         pictureSvc_ =  new RestAdapter.Builder()
                 .setEndpoint(SERVER)
                 .setLogLevel(LogLevel.FULL)
                 .setConverter(new GsonConverter(gson))
-                .build().create(PictureSvcApi.class);
+                .build()
+                .create(PictureSvcApi.class);
 
-        //pictureSvc_ = new TestPictureSvcApi(); // This is an implementation of the API interface for testing
+       // pictureSvc_ = new TestPictureSvcApi(); // This is an implementation of the API interface for testing
         Log.d("TEST API", "CREATED");
         return pictureSvc_;
     }
