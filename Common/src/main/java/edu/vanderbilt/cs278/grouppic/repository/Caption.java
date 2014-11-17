@@ -24,7 +24,7 @@ public class Caption {
     private String user;
     private int votes;
     private String content;
-    private Date date;
+    private long date;
     
 
     
@@ -68,9 +68,9 @@ public class Caption {
     
     public Picture getPicture() { return picture; }
     
-    public Date getDate() { return date; }
+    public long getDate() { return date; }
     
-    public void setDate(Date date) { this.date = date; }
+    public void setDate(long date) { this.date = date; }
 
     public void upvote() { ++votes; }
     public void downvote() { --votes; }

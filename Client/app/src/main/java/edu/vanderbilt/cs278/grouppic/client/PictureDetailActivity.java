@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
+
 import java.util.concurrent.Callable;
 import org.magnum.videoup.client.R;
 
@@ -104,10 +106,15 @@ public class PictureDetailActivity extends Activity {
                 @Override
                 public void success(Picture result) {
                     Log.d("picture", result.toString());
-                    byte[] img = result.getImage();
-                    Bitmap bmp = BitmapFactory.decodeByteArray(img, 0 , img.length);
+                    try {
+                        byte[] img = result.imageToByteArray();
+                        Bitmap bmp = BitmapFactory.decodeByteArray(img, 0, img.length);
+                        img_.setImageBitmap(bmp);
+                    } catch (Base64DecodingException e) {
+                        Log.e(this.getClass().getName(), e.toString());
+                    }
 
-                    img_.setImageBitmap(bmp);
+
                 }
 
                 @Override

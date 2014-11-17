@@ -95,10 +95,12 @@ public class MainListView extends Activity {
             }, new TaskCallback<Collection<Picture>>() {
                 @Override
                 public void success(Collection<Picture> result) {
+                    Log.d("ADD", "Retrieved Pictures " + result.size());
                     for (Picture p : result) {
                         Log.d("Add", "Picture Added to listView " + p.getId());
                         pics.add(p);
                         pictures.add(p.getSender());
+                        listViewAdapter.notifyDataSetChanged();
                     }
                 }
 

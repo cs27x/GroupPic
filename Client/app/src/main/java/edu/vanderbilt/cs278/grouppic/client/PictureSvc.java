@@ -4,11 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import edu.vanderbilt.cs278.grouppic.repository.Picture;
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.converter.GsonConverter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+
+import java.lang.reflect.Type;
+import java.util.Date;
+
 /**
  * Created by andrewbachman on 10/28/14.
  *
@@ -21,7 +30,6 @@ public class PictureSvc {
     public static final String SERVER = "http://192.168.56.1:8080";
 
     private static final Gson gson = new GsonBuilder()
-            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
             .create();
     private static PictureSvcApi pictureSvc_;
 

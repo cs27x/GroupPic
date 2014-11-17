@@ -1,9 +1,6 @@
 package edu.vanderbilt.cs278.grouppic.repository;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -21,6 +18,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Strings;
+import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 
 
@@ -44,7 +43,7 @@ public class Picture {
     /**
      * Date the picture was sent
      */
-    private Date date;
+    private long date;
 
     /**
      * Collection of strings representing the ids of the recipients
@@ -62,21 +61,20 @@ public class Picture {
      * Byte array storing the image.
      * Stored as a byte array to allow sending over HTTP and allow for easier JSON parsing
      */
-    private byte[] image;
+    private String image;
 
     public Picture() { 
     	captions = new ArrayList<Caption>();
     	recipients = new ArrayList<Long>();
-    	image = new byte[1];
-    	image[0] = 0;
+    	image = "";
     }
 
-    public Picture(String sender, Date date, Collection<Long> recipients, Collection<Caption> captions, byte[] image) {
+    public Picture(String sender, long date, Collection<Long> recipients, Collection<Caption> captions, byte[] image) {
         this.sender = sender;
         this.date = date;
         this.recipients = recipients;
         this.captions = captions;
-        this.image = image;
+        this.image = Base64.encode(image);
     }
 
 	public long getId() {
@@ -91,9 +89,9 @@ public class Picture {
 
     public void setSender(String sender) { this.sender = sender; }
 
-    public Date getDate() { return date; }
+    public long getDate() { return date; }
 
-    public void setDate(Date date) { this.date = date; }
+    public void setDate(long date) { this.date = date; }
 
     public Collection<Long> getRecipients() { return recipients; }
 
@@ -105,9 +103,9 @@ public class Picture {
     
     public Collection<Caption> getCaptions() { return captions; }
 
-    public byte[] getImage() { return image; }
+    public String getImage() { return image; }
 
-    public void setImage(byte[] image) { this.image = image; }
+    public void setImage(String image) { this.image = image; }
 
     /**
      * @author andrewbachman
@@ -140,7 +138,7 @@ public class Picture {
 			// Google Guava provides great utilities for equals too!
 			boolean sEquals = Objects.equal(sender, other.sender);
 			boolean dEquals =  Objects.equal(date, other.date);
-			boolean iEquals =  Arrays.equals(image, other.image);
+			boolean iEquals =  image.equals(other.image);
 			boolean cEquals =  Arrays.deepEquals(getCaptions().toArray(), other.getCaptions().toArray());
 			boolean rEquals =  Arrays.deepEquals(getRecipients().toArray(), other.getRecipients().toArray());
 			return sEquals & dEquals & iEquals & cEquals & rEquals;
@@ -155,8 +153,12 @@ public class Picture {
 					 ", SENDER: " + this.getSender() +
 					 ", RECIPIENTS: " + this.getRecipients().toString() +
 					 ", CAPTIONS: " + this.getCaptions().toString() +
-					 ", DATE: " + this.getDate().toString() +
-					 ", IMAGE: [" + Base64.encode(image) + "]";
+					 ", DATE: " + new Date(this.getDate()).toString() +
+					 ", IMAGE: [" + image + "]";
 		return ret;
+	}
+	
+	public byte[] imageToByteArray() throws Base64DecodingException {
+		return Base64.decode(image);
 	}
 }
