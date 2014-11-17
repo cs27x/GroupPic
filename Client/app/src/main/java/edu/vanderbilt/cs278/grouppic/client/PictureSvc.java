@@ -2,12 +2,13 @@ package edu.vanderbilt.cs278.grouppic.client;
 
 import android.content.Context;
 import android.content.Intent;
-
-import org.magnum.mobilecloud.video.client.VideoSvcApi;
-import org.magnum.videoup.client.LoginScreenActivity;
+import android.util.Log;
 
 import retrofit.RestAdapter;
-
+import retrofit.RestAdapter.LogLevel;
+import retrofit.converter.GsonConverter;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 /**
  * Created by andrewbachman on 10/28/14.
  *
@@ -17,7 +18,10 @@ import retrofit.RestAdapter;
  */
 public class PictureSvc {
 
-    public static final String SERVER = "http://localhost:8080";
+    public static final String SERVER = "http://192.168.56.1:8080";
+    private static final Gson gson = new GsonBuilder()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+            .create();
     private static PictureSvcApi pictureSvc_;
 
     public static synchronized PictureSvcApi getOrShowLogin(Context ctx) {
@@ -32,23 +36,21 @@ public class PictureSvc {
             return init();
         }
     }
-/*
-    public static synchronized PictureSvcApi init(String server, String user,
-                                                String pass) {
 
-        videoSvc_ =
-                new RestAdapter.Builder()
-                        .setEndpoint(server).setLogLevel(RestAdapter.LogLevel.FULL).build()
-                        .create(VideoSvcApi.class);
-
-        return videoSvc_;
-    }
-    */
     public static synchronized PictureSvcApi init() {
-        pictureSvc_ = new RestAdapter.Builder().setEndpoint(SERVER)
-                .setLogLevel(RestAdapter.LogLevel.FULL).build()
-                .create(PictureSvcApi.class);
 
+        // This section is commented out for testing purposes
+        // When the server is running it should be replaced
+
+
+        pictureSvc_ =  new RestAdapter.Builder()
+                .setEndpoint(SERVER)
+                .setLogLevel(LogLevel.FULL)
+                .setConverter(new GsonConverter(gson))
+                .build().create(PictureSvcApi.class);
+
+        //pictureSvc_ = new TestPictureSvcApi(); // This is an implementation of the API interface for testing
+        Log.d("TEST API", "CREATED");
         return pictureSvc_;
     }
 }

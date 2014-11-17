@@ -19,7 +19,6 @@ import com.openpojo.validation.test.impl.SetterTester;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.magnum.mobilecloud.video.repository.Video;
 
 import java.util.List;
 
@@ -57,7 +56,7 @@ public class PojoTest {
         pojoValidator.addRule(new SetterMustExistRule());
 
         // Create Testers to validate behaviour for POJO_PACKAGE
-        pojoValidator.addTester(new DefaultValuesNullTester());
+        // pojoValidator.addTester(new DefaultValuesNullTester());
         pojoValidator.addTester(new SetterTester());
         pojoValidator.addTester(new GetterTester());
     }

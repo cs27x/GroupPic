@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.grouppic.PicturePostActivity" >
+
+    <Button
+        android:id = "@+id/button_select_pic"
+        android:layout_height = "wrap_content"
+        android:layout_width = "wrap_content"
+        android:text = "Select Picture"
+        android:onClick = "selectPicture"
+        android:layout_centerHorizontal = "true"
+    />
+    
+    <ImageView 
+        android:id = "@+id/iv_selected_image"
+        android:layout_below = "@+id/button_select_pic"
+        android:layout_height = "wrap_content"
+        android:layout_width = "wrap_content"
+        android:layout_centerHorizontal = "true"
+        android:src = "@drawable/ic_launcher"
+     />
+    
+    <TextView
+        android:id = "@+id/text_select_friends"
+        android:text = "Select Friends:"
+        android:layout_height = "wrap_content"
+        android:layout_width = "wrap_content"
+        android:layout_centerHorizontal = "true"
+        android:layout_below = "@+id/iv_selected_image"
+        android:textSize = "23sp"
+    />
+    
+    <ListView
+        android:id = "@+id/lv_friend_list"
+        android:layout_height = "wrap_content"
+        android:layout_width = "wrap_content"
+        android:layout_below = "@+id/text_select_friends"
+        android:layout_centerHorizontal = "true"
+    />
+    
+    <Button
+        android:id= "@+id/button_send_picture"
+        android:layout_below = "@+id/lv_friend_list"
+        android:layout_height = "wrap_content"
+        android:layout_width = "wrap_content"
+        android:text = "Send"
+        android:onClick = "sendPicture"
+        android:layout_centerHorizontal = "true"
+    />
+
+</RelativeLayout>

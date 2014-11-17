@@ -12,13 +12,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.magnum.mobilecloud.video.client.VideoSvcApi;
-import org.magnum.mobilecloud.video.repository.Video;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import edu.vanderbilt.cs278.grouppic.client.CallableTask;
+import edu.vanderbilt.cs278.grouppic.client.TaskCallback;
 
 public class VideoListActivity extends Activity {
+    /*
 
 	@InjectView(R.id.videoList)
 	protected ListView videoList_;
@@ -44,35 +44,36 @@ public class VideoListActivity extends Activity {
 		if (svc != null) {
 			CallableTask.invoke(new Callable<Collection<Video>>() {
 
-				@Override
-				public Collection<Video> call() throws Exception {
-					return svc.getVideoList();
-				}
-			}, new TaskCallback<Collection<Video>>() {
+                @Override
+                public Collection<Video> call() throws Exception {
+                    return svc.getVideoList();
+                }
+            }, new TaskCallback<Collection<Video>>() {
 
-				@Override
-				public void success(Collection<Video> result) {
-					List<String> names = new ArrayList<String>();
-					for (Video v : result) {
-						names.add(v.getName());
-					}
-					videoList_.setAdapter(new ArrayAdapter<String>(
-							VideoListActivity.this,
-							android.R.layout.simple_list_item_1, names));
-				}
+                @Override
+                public void success(Collection<Video> result) {
+                    List<String> names = new ArrayList<String>();
+                    for (Video v : result) {
+                        names.add(v.getName());
+                    }
+                    videoList_.setAdapter(new ArrayAdapter<String>(
+                            VideoListActivity.this,
+                            android.R.layout.simple_list_item_1, names));
+                }
 
-				@Override
-				public void error(Exception e) {
-					Toast.makeText(
-							VideoListActivity.this,
-							"Unable to fetch the video list, please login again.",
-							Toast.LENGTH_SHORT).show();
+                @Override
+                public void error(Exception e) {
+                    Toast.makeText(
+                            VideoListActivity.this,
+                            "Unable to fetch the video list, please login again.",
+                            Toast.LENGTH_SHORT).show();
 
-					startActivity(new Intent(VideoListActivity.this,
-							LoginScreenActivity.class));
-				}
-			});
+                    startActivity(new Intent(VideoListActivity.this,
+                            LoginScreenActivity.class));
+                }
+            });
 		}
 	}
+	*/
 
 }
