@@ -80,7 +80,7 @@ public class PictureSvcClientApiTest extends TestCase {
 			.build()
 			.create(PictureSvcApi.class);
 
-	private static final String TEST_IMAGE_1 = "/jackson-poster.jpg";
+	private static final String TEST_IMAGE_1 = "jackson-poster.jpg";
 	private static final String TEST_IMAGE_2 = "jacksonasdfasdf-poster.jpg";
 
 	private Picture pic;
@@ -92,16 +92,16 @@ public class PictureSvcClientApiTest extends TestCase {
 	 */
 	@Override
 	protected void setUp() throws IOException {
-		/*InputStream is = this.getClass().getClassLoader().getResourceAsStream(TEST_IMAGE_1);
-		// this.getClass().getClassLoader().getR
-		if (is == null) {
-			throw new IOException("Could not open image file: " + TEST_IMAGE_1);
-		}*/	
-		pic = new Picture("test sender", new Date(), new ArrayList<Long>(), new ArrayList<Caption>(), pretendImageData );
-		// ImageInputStream iis = ImageIO.createImageInputStream(is);
-		// System.out.println(iis.length());
+		InputStream is = this.getClass().getClassLoader().getResourceAsStream(TEST_IMAGE_1);
+		assertNotNull(is);
+		ImageInputStream iis = ImageIO.createImageInputStream(is);
+		assertNotNull(iis);
 		// pic.setImageFromStream(iis);
 		// pic.setImage(pretendImageData);
+		pretendImageData = new byte[2000];
+		iis.read(pretendImageData);
+		pic = new Picture("test sender", new Date(), new ArrayList<Long>(), new ArrayList<Caption>(), pretendImageData );
+		
 		
 		
 	}

@@ -12,6 +12,7 @@ import java.util.Date;
 import javax.imageio.ImageIO;
 import javax.persistence.CascadeType;
 import javax.persistence.CollectionTable;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -62,6 +63,7 @@ public class Picture {
      * Byte array storing the image.
      * Stored as a byte array to allow sending over HTTP and allow for easier JSON parsing
      */
+    @Column(length=10000)
     private byte[] image;
 
     public Picture() { 
