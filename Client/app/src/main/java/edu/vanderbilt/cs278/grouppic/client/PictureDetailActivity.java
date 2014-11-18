@@ -13,7 +13,6 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.concurrent.Callable;
-import org.magnum.videoup.client.R;
 
 import java.util.ArrayList;
 import java.util.Collection;

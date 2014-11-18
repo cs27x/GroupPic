@@ -22,7 +22,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
-import org.magnum.videoup.client.R;
 
 
 import butterknife.ButterKnife;

@@ -5,8 +5,8 @@ android {
     buildToolsVersion "20.0.0"
 
     defaultConfig {
-        applicationId "com.magnum.videoup"
-        minSdkVersion 19
+        applicationId "edu.vanderbilt.cs278.grouppic.client"
+        minSdkVersion 18
         targetSdkVersion 20
         versionCode 1
         versionName "1.0"

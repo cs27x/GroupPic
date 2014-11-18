@@ -13,7 +13,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import org.magnum.videoup.client.R;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -84,7 +83,9 @@ public class MainListView extends Activity {
     }
 
     private void getPicturesList() {
-        final PictureSvcApi svc = PictureSvc.getOrShowLogin(this);
+        //final PictureSvcApi svc = PictureSvc.getOrShowLogin(this);
+        final PictureSvcApi svc = new TestPictureSvcApi(); //TESTING
+
 
         if (svc != null) {
             CallableTask.invoke(new Callable<Collection<Picture>>() {
