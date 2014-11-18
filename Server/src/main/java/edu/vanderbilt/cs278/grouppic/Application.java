@@ -1,5 +1,7 @@
 package edu.vanderbilt.cs278.grouppic;
 
+import java.net.UnknownHostException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -8,6 +10,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.core.MongoFactoryBean;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.core.config.ResourceMappingConfiguration;
@@ -16,6 +22,12 @@ import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.MongoException;
+import com.mongodb.MongoOptions;
+import com.mongodb.MongoURI;
 
 import edu.vanderbilt.cs278.grouppic.json.ResourcesMapper;
 import edu.vanderbilt.cs278.grouppic.repository.Caption;
@@ -75,6 +87,15 @@ public class Application {
 	public ObjectMapper resourceMapper() {
 		return new ResourcesMapper();
 	}
+	
+    @SuppressWarnings("deprecation")
+	public @Bean MongoDbFactory mongoDbFactory() throws MongoException, UnknownHostException {
+        return new SimpleMongoDbFactory(new MongoURI("mongodb://grouppic:cs278@ds045087.mongolab.com:45087/grouppic"));
+    }
+
+    public @Bean MongoTemplate mongoTemplate() throws Exception {
+        return new MongoTemplate(mongoDbFactory());
+    }
 	
 	
 	/*@Bean
