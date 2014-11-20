@@ -4,11 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import edu.vanderbilt.cs278.grouppic.repository.Picture;
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.converter.GsonConverter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializationContext;
+import com.google.gson.JsonDeserializer;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParseException;
+
+import java.lang.reflect.Type;
+import java.util.Date;
+
 /**
  * Created by andrewbachman on 10/28/14.
  *
@@ -19,8 +28,8 @@ import com.google.gson.GsonBuilder;
 public class PictureSvc {
 
     public static final String SERVER = "http://192.168.56.1:8080";
+
     private static final Gson gson = new GsonBuilder()
-            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
             .create();
     private static PictureSvcApi pictureSvc_;
 
@@ -42,14 +51,14 @@ public class PictureSvc {
         // This section is commented out for testing purposes
         // When the server is running it should be replaced
 
-
         pictureSvc_ =  new RestAdapter.Builder()
                 .setEndpoint(SERVER)
                 .setLogLevel(LogLevel.FULL)
                 .setConverter(new GsonConverter(gson))
-                .build().create(PictureSvcApi.class);
+                .build()
+                .create(PictureSvcApi.class);
 
-        //pictureSvc_ = new TestPictureSvcApi(); // This is an implementation of the API interface for testing
+       // pictureSvc_ = new TestPictureSvcApi(); // This is an implementation of the API interface for testing
         Log.d("TEST API", "CREATED");
         return pictureSvc_;
     }

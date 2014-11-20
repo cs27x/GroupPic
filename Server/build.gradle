@@ -7,7 +7,7 @@ buildscript {
         mavenLocal()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.0.2.RELEASE")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.9.RELEASE")
     }
 }
 
@@ -35,16 +35,16 @@ dependencies {
 
     compile project(":Common")
 
-    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}") {
+    compile("org.springframework.boot:spring-boot-starter-web") {
         exclude module: "spring-boot-starter-tomcat"
     }
-    providedRuntime("org.springframework.boot:spring-boot-starter-jetty:${springBootVersion}")
+    providedRuntime("org.springframework.boot:spring-boot-starter-jetty")
 
-    compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
-    compile("org.springframework.boot:spring-boot-starter-aop:${springBootVersion}")
-    compile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
-    compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.springframework.boot:spring-boot-starter-aop")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.data:spring-data-rest-webmvc")
+    compile("org.springframework.data:spring-data-mongodb")
     
     compile("org.hsqldb:hsqldb")
 	compile("com.squareup.retrofit:retrofit:1.6.1")

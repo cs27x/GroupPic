@@ -1,17 +1,33 @@
 package edu.vanderbilt.cs278.grouppic;
 
+import java.net.UnknownHostException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.mongodb.MongoDbFactory;
+import org.springframework.data.mongodb.core.MongoFactoryBean;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
+import org.springframework.data.rest.core.config.ResourceMappingConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
+import com.mongodb.MongoException;
+import com.mongodb.MongoOptions;
+import com.mongodb.MongoURI;
 
 import edu.vanderbilt.cs278.grouppic.json.ResourcesMapper;
 import edu.vanderbilt.cs278.grouppic.repository.Caption;
@@ -24,7 +40,7 @@ import edu.vanderbilt.cs278.grouppic.repository.PictureRepository;
 @EnableAutoConfiguration
 // Tell Spring to automatically create a JPA implementation of our
 // VideoRepository
-@EnableJpaRepositories(basePackageClasses = {PictureRepository.class, CaptionRepository.class})
+//@EnableJpaRepositories(basePackageClasses = {PictureRepository.class, CaptionRepository.class})
 // Tell Spring to turn on WebMVC (e.g., it should enable the DispatcherServlet
 // so that requests can be routed to our Controllers)
 @EnableWebMvc
@@ -36,7 +52,9 @@ import edu.vanderbilt.cs278.grouppic.repository.PictureRepository;
 // Any class in this package that is annotated with @Controller is going to be
 // automatically discovered and connected to the DispatcherServlet.
 @ComponentScan
-public class Application extends RepositoryRestMvcConfiguration {
+@EnableMongoRepositories
+//@Import(RepositoryRestMvcConfiguration.class)
+public class Application {
 
 	// Tell Spring to launch our app!
 	public static void main(String[] args) {
@@ -64,21 +82,33 @@ public class Application extends RepositoryRestMvcConfiguration {
 	/*@Autowired
 	private ObjectMapper myObjectMapper;
 	@Bean*/
-	@Override	
-	public ObjectMapper halObjectMapper() {
+	
+	@Bean	
+	public ObjectMapper resourceMapper() {
 		return new ResourcesMapper();
 	}
+	
+    @SuppressWarnings("deprecation")
+	public @Bean MongoDbFactory mongoDbFactory() throws MongoException, UnknownHostException {
+        return new SimpleMongoDbFactory(new MongoURI("mongodb://grouppic:cs278@ds045087.mongolab.com:45087/grouppic"));
+    }
+
+    public @Bean MongoTemplate mongoTemplate() throws Exception {
+        return new MongoTemplate(mongoDbFactory());
+    }
+	
 	
 	/*@Bean
 	@Override
 	public ObjectMapper objectMapper() {
 		return new ResourcesMapper();
 	}*/
-
+/*
 	@Override
 	protected void configureRepositoryRestConfiguration(
 			RepositoryRestConfiguration config) {
 		config.exposeIdsFor(Picture.class, Caption.class );
 	}
+	*/
 
 }
