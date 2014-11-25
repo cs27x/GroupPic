@@ -155,7 +155,7 @@ public class ResourcesMapper extends ObjectMapper {
 	public ResourcesMapper() {
 		
 		SimpleModule module = new SimpleModule();
-		module.addSerializer(serializer);	
+		//module.addSerializer(serializer);	
 		module.addSerializer(dateSerializer);
 		module.addSerializer(byteArraySerializer);
 		registerModule(module);

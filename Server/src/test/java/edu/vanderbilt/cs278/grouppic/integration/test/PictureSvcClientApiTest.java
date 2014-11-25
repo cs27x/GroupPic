@@ -97,7 +97,7 @@ public class PictureSvcClientApiTest extends TestCase {
 		if (is == null) {
 			throw new IOException("Could not open image file: " + TEST_IMAGE_1);
 		}*/	
-		pic = new Picture("test sender", new Date(), new ArrayList<Long>(), new ArrayList<Caption>(), pretendImageData );
+		pic = new Picture("test sender", new Date().getTime(), new ArrayList<Long>(), new ArrayList<Caption>(), pretendImageData );
 		// ImageInputStream iis = ImageIO.createImageInputStream(is);
 		// System.out.println(iis.length());
 		// pic.setImageFromStream(iis);

@@ -80,9 +80,9 @@ public class PicturePostActivity extends Activity {
                 public Picture call() throws Exception {
                     Random r = new Random();
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                    // currentImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    currentImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
                     byte[] byteArray = stream.toByteArray();
-                    Picture p = new Picture("Current Test User", new Date(), new ArrayList<Long>(),
+                    Picture p = new Picture("Current Test User", new Date().getTime(), new ArrayList<Long>(),
                             new ArrayList<Caption>(), byteArray);
                     p.setId(r.nextLong());
                     Log.d("Send Picture", p.toString() + " id: " + p.getId());

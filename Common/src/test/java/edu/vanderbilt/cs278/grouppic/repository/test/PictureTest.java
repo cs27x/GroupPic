@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 public class PictureTest {
     // TODO: Add tests for the images in the Picture class add actual picture to byte array
     private final Date date = new Date();
-    private final Picture picture = new Picture("Test User", date,
+    private final Picture picture = new Picture("Test User", date.getTime(),
             new ArrayList(), new ArrayList(), new byte[10]);
 
     @Test

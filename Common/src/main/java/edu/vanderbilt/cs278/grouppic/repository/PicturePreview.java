@@ -10,7 +10,7 @@ import java.util.Date;
 public class PicturePreview {
 
     private long id;
-    private Date date;
+    private long date;
     private String sender;
 
     public PicturePreview() {}
@@ -20,7 +20,7 @@ public class PicturePreview {
      * @param date2 - the date and time the message was send
      * @param sender - the user who sent the message
      */
-    public PicturePreview(Date date2, String sender) {
+    public PicturePreview(long date2, String sender) {
         this.date = date2;
         this.sender = sender;
     }
@@ -33,9 +33,9 @@ public class PicturePreview {
         this.id = id;
     }
 
-    public Date getDate() { return date; }
+    public long getDate() { return date; }
 
-    public void setDate(Date date) { this.date = date; }
+    public void setDate(long date) { this.date = date; }
 
     public String getSender() { return sender; }
 
