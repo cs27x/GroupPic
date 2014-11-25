@@ -4,8 +4,8 @@ import android.os.Looper;
 
 import junit.framework.TestCase;
 
-import org.magnum.videoup.client.CallableTask;
-import org.magnum.videoup.client.TaskCallback;
+import edu.vanderbilt.cs278.grouppic.client.CallableTask;
+import edu.vanderbilt.cs278.grouppic.client.TaskCallback;
 
 import java.util.concurrent.Callable;
 

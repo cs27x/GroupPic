@@ -1,7 +1,5 @@
 package org.magnum.mobilecloud.video;
 
-import org.magnum.mobilecloud.video.repository.Video;
-
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
@@ -36,21 +34,6 @@ public class TestUtils {
         }
 
         return realLocalHost;
-    }
-
-    public static long randomVideoDuration(){
-        return (long)Math.rint(Math.random() * 1000);
-    }
-
-    public static Video randomVideo() {
-        return new Video(
-                randomVideoName(),
-                "http://" + randomVideoName(),
-                randomVideoDuration());
-    }
-
-    public static String randomVideoName() {
-        return UUID.randomUUID().toString();
     }
 
 }
