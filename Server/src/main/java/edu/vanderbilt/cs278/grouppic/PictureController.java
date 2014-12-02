@@ -65,14 +65,7 @@ public class PictureController implements PictureSvcApi {
 	@RequestMapping(value="/test", method=RequestMethod.GET)
 	@ResponseBody
 	public String getTest() {
-		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		String username = "ERROR";
-		if (principal instanceof UserDetails) {
-		   username = ((UserDetails)principal).getUsername();
-		} else {
-		   username = principal.toString();
-		}	
-		return username;
+		return getCurrentUser();
 	}
 
 	@Override
@@ -85,6 +78,25 @@ public class PictureController implements PictureSvcApi {
 	public Void deletePicture(long id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	protected String getCurrentUser() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal == null) {
+			throw new UserAuthenticationError();
+		}
+		String username;
+		try {
+			if (principal instanceof UserDetails) {
+			   username = ((UserDetails)principal).getUsername();
+			} else {
+			   username = principal.toString();
+			}	
+		}
+		catch (Exception e) {
+			throw new UserAuthenticationError();
+		}
+		return username;
 	}
 	
 }
