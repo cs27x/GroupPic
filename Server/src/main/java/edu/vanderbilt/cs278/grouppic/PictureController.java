@@ -60,7 +60,7 @@ public class PictureController implements PictureSvcApi {
 	@ResponseBody
 	public Collection<Caption> getComments(@PathVariable("id") long id) {
 		// TODO Auto-generated method stub
-		return captionRepo.findByPicId(id);
+		return captionRepo.findByCurrentPictureId(id);
 		}
 
 	@Override
