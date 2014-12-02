@@ -63,7 +63,7 @@ public class PictureController implements PictureSvcApi {
 	}
 
 	@Override
-	@RequestMapping(value="/picture/{id}/comment", method=RequestMethod.POST)
+	@RequestMapping(value="/picture/{id}/comments", method=RequestMethod.POST)
 	public Caption postCaption(Caption c) {
 		// TODO Auto-generated method stub
 		return captionRepo.save(c);
@@ -71,7 +71,7 @@ public class PictureController implements PictureSvcApi {
 
 
 	@Override
-	@RequestMapping(value="/picture/{id}/comment"+"/{id}"+"/like", method = RequestMethod.POST)
+	@RequestMapping(value="/picture/{id}/comments"+"/{id}"+"/like", method = RequestMethod.POST)
 	public Caption likeCaption(long id) {
 		captionRepo.findOne(id).upvote();
 		// TODO Auto-generated method stub
