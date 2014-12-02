@@ -37,9 +37,7 @@ dependencies {
 
     compile("org.springframework.boot:spring-boot-starter-web") 
     
-    compile("org.springframework.boot:spring-boot-starter-tomcat:${springBootVersion}")    
-
-    providedRuntime("org.springframework.boot:spring-boot-starter-jetty:${springBootVersion}")
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat:${springBootVersion}")    
 
     compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
     compile("org.springframework.boot:spring-boot-starter-aop:${springBootVersion}")
