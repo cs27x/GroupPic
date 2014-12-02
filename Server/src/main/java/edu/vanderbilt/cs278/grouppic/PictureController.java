@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import edu.vanderbilt.cs278.grouppic.client.PictureSvcApi;
 import edu.vanderbilt.cs278.grouppic.repository.Caption;
+import edu.vanderbilt.cs278.grouppic.repository.CaptionRepository;
 import edu.vanderbilt.cs278.grouppic.repository.Picture;
 import edu.vanderbilt.cs278.grouppic.repository.PictureRepository;
 
@@ -21,9 +22,11 @@ public class PictureController implements PictureSvcApi {
 	
 	@Autowired
 	private PictureRepository pictureRepo;
+	private CaptionRepository captionRepo;
 	
-	public PictureController(PictureRepository p) {
+	public PictureController(PictureRepository p, CaptionRepository c) {
 		pictureRepo = p;
+		captionRepo = c;
 	}
 	public PictureController() {
 		
@@ -52,23 +55,37 @@ public class PictureController implements PictureSvcApi {
 	}
 
 	@Override
-	@RequestMapping(value="/captions/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/picture/{id}/comments", method=RequestMethod.GET)
 	@ResponseBody
 	public Collection<Caption> getComments(@PathVariable("id") long id) {
 		// TODO Auto-generated method stub
-		return null;
+		return captionRepo.findAll();
 	}
 
 	@Override
+	@RequestMapping(value="/picture/{id}/comment", method=RequestMethod.POST)
 	public Caption postCaption(Caption c) {
 		// TODO Auto-generated method stub
-		return null;
+		return captionRepo.save(c);
 	}
 
+
 	@Override
+	@RequestMapping(value="/picture/{id}/comment"+"/{id}"+"/like", method = RequestMethod.POST)
+	public Caption likeCaption(long id) {
+		captionRepo.findOne(id).upvote();
+		// TODO Auto-generated method stub
+		return captionRepo.findOne(id);
+	}
+	@Override
+
+	@RequestMapping(value="/picture/{id}", method=RequestMethod.DELETE)
 	public Void deletePicture(long id) {
 		// TODO Auto-generated method stub
+		pictureRepo.delete(id);
 		return null;
 	}
+	
+	
 	
 }
