@@ -127,7 +127,8 @@ public class PictureSvcClientApiTest extends TestCase {
 		
 		for (Picture pic: pics){
 			
-			picService.postCaption(cap);
+			
+			picService.postCaption(cap, pic.getId());
 		}
 		
 		System.err.println("ORIGINAL: " + pic.toString());

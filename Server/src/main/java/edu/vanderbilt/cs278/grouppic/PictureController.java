@@ -59,23 +59,24 @@ public class PictureController implements PictureSvcApi {
 	@ResponseBody
 	public Collection<Caption> getComments(@PathVariable("id") long id) {
 		// TODO Auto-generated method stub
-		return captionRepo.findAll();
-	}
+		return captionRepo.findByPicId(id);
+		}
 
 	@Override
 	@RequestMapping(value="/picture/{id}/comments", method=RequestMethod.POST)
-	public Caption postCaption(Caption c) {
+	public Caption postCaption(Caption c, @PathVariable ("id") long id) {
 		// TODO Auto-generated method stub
+		c.setPictureId(id);
 		return captionRepo.save(c);
 	}
 
 
 	@Override
-	@RequestMapping(value="/picture/{id}/comments"+"/{id}"+"/like", method = RequestMethod.POST)
-	public Caption likeCaption(long id) {
-		captionRepo.findOne(id).upvote();
+	@RequestMapping(value="/picture/{id}/comments"+"/{cd}"+"/like", method = RequestMethod.POST)
+	public Caption likeCaption(@PathVariable ("cd") long cd) {
+		captionRepo.findOne(cd).upvote();
 		// TODO Auto-generated method stub
-		return captionRepo.findOne(id);
+		return captionRepo.findOne(cd);
 	}
 	@Override
 

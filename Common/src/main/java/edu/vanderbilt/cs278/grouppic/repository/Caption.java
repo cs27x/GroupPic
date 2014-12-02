@@ -21,6 +21,7 @@ public class Caption {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    private long pictureId;
     private String user;
     private int votes;
     private String content;
@@ -72,6 +73,9 @@ public class Caption {
     
     public void setDate(long date) { this.date = date; }
 
+    public void setPictureId(long id) { this.pictureId = id; }
+    
+    public long getPictureId() {return pictureId; } 
     public void upvote() { ++votes; }
     public void downvote() { --votes; }
 

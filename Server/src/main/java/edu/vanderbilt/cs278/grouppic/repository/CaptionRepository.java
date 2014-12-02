@@ -9,9 +9,12 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import edu.vanderbilt.cs278.grouppic.client.*;
 
-@RepositoryRestResource(collectionResourceRel="picture", path = "/caption")
+@RepositoryRestResource(collectionResourceRel="pictures")
 public interface CaptionRepository  extends MongoRepository<Caption, Long> {	
 	
-	// public Collection<String> captions();
+	public Collection<Caption> findByPicId( @Param ("id") long picId);
+	
+	
+	
 	
 }

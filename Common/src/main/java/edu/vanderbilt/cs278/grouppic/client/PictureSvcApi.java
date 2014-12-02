@@ -39,10 +39,10 @@ public interface PictureSvcApi {
     public Collection<Caption> getComments(@Path("id") long id);
 
     @POST(POST_COMMENT_PATH)
-    public Caption postCaption(@Body Caption c);
+    public Caption postCaption(@Body Caption c, @Path ("id") long id);
     
-    @POST(POST_COMMENT_PATH +"/{id}"+"/like")
-    public Caption likeCaption(@Path ("id") long id);
+    @POST(POST_COMMENT_PATH +"/{cd}"+"/like")
+    public Caption likeCaption(@Path ("cd") long id);
     
     
     @DELETE(PICTURE_PATH + "/{id}")
