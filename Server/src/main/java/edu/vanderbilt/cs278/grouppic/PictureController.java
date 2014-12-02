@@ -3,6 +3,8 @@ package edu.vanderbilt.cs278.grouppic;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,6 +59,20 @@ public class PictureController implements PictureSvcApi {
 	public Collection<Caption> getComments(@PathVariable("id") long id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	//@Override
+	@RequestMapping(value="/test", method=RequestMethod.GET)
+	@ResponseBody
+	public String getTest() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = "ERROR";
+		if (principal instanceof UserDetails) {
+		   username = ((UserDetails)principal).getUsername();
+		} else {
+		   username = principal.toString();
+		}	
+		return username;
 	}
 
 	@Override
