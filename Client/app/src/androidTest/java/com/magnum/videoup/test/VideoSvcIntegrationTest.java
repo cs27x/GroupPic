@@ -2,12 +2,6 @@ package com.magnum.videoup.test;
 
 import junit.framework.TestCase;
 
-import org.magnum.mobilecloud.video.TestUtils;
-
-import org.magnum.videoup.client.VideoSvc;
-
-import java.util.Collection;
-
 /**
  * This test assumes that you are running integration testing against
  * a local version of the server and using the emulator. The server

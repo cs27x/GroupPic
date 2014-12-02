@@ -22,7 +22,7 @@ GroupPic
  9. As a user, I can view the comments of all the pictures that are visible to me.
  10. As a user, I can upvote/downvote comments
  11. As a user, I can create an account.
- 
+
 ### Acceptance Criteria
 
  1. As a user, I can send a picture to a group of people.
@@ -82,7 +82,7 @@ GroupPic
 
 ### API
 
-<strong>GET</strong> /photo
+<strong>GET</strong> /picture
 
  Parameters:
   * User : Current logged in user
@@ -92,18 +92,18 @@ GroupPic
   * 400 if there is an error in the request or request JSON
   * 500 if there is a server error
 
-<strong>GET</strong> /photo/{_id}
+<strong>GET</strong> /picture/{_id}
 
 Parameters:
   * User : currently logged in user
   * id : the requested image
 
 Response:
-  * 201 if successful JSON body containing a list of all the images
+  * 201 if successful JSON body containing a single image with the given id.
   * 400 if there is an error in the request or request JSON
   * 500 if there is a server error
 
-<strong>GET</strong> /photo/{_id}/captions
+<strong>GET</strong> /picture/{_id}/captions
 
 Parameters:
   * User : currently logged in user
@@ -114,10 +114,11 @@ Response:
   * 400 if there is an error in the request or request JSON
   * 500 if there is a server error
 
-<strong>POST</strong> /photo
+<strong>POST</strong> /picture
 
 Parameters:
   * User : currently logged in user
+  * picture : the picture that will be sent
   * to_users : List of the photo will be sent to
 
 Response:
@@ -125,11 +126,11 @@ Response:
   * 400 if there is an error in the request or request JSON
   * 500 if there is a server error
 
-<strong>POST</strong> /photo/caption
+<strong>POST</strong> /picture/caption
 
 Parameters:
   * User : currently logged in user
-  * photo : the id of the photo the caption will be associated with
+  * id : the id of the photo the caption will be associated with
 
 Response:
   * 201 if successful JSON body containing a list of all the images

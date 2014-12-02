@@ -4,15 +4,11 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import org.magnum.mobilecloud.video.TestUtils;
 import org.magnum.videoup.client.R;
 import org.magnum.mobilecloud.video.client.VideoSvcApi;
 import org.magnum.mobilecloud.video.repository.Video;
-import org.magnum.videoup.client.VideoListActivity;
-import org.magnum.videoup.client.VideoSvc;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * This test assumes that you are running integration testing against
