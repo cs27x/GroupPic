@@ -22,6 +22,7 @@ public class PictureController implements PictureSvcApi {
 	
 	@Autowired
 	private PictureRepository pictureRepo;
+	@Autowired
 	private CaptionRepository captionRepo;
 	
 	public PictureController(PictureRepository p, CaptionRepository c) {
@@ -73,10 +74,10 @@ public class PictureController implements PictureSvcApi {
 
 	@Override
 	@RequestMapping(value="/picture/{id}/comments"+"/{cd}"+"/like", method = RequestMethod.POST)
-	public Caption likeCaption(@PathVariable ("cd") long cd) {
+	public Void likeCaption(@PathVariable ("cd") long cd) {
 		captionRepo.findOne(cd).upvote();
 		// TODO Auto-generated method stub
-		return captionRepo.findOne(cd);
+		return null;
 	}
 	@Override
 

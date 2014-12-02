@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Random;
 
 import org.junit.Test;
 
@@ -36,7 +37,6 @@ import edu.vanderbilt.cs278.grouppic.client.PictureSvcApi;
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.converter.GsonConverter;
-
 
 import java.lang.reflect.Type;
 
@@ -87,12 +87,14 @@ public class PictureSvcClientApiTest extends TestCase {
 	private Picture pic;
 	private Caption cap;
 	private byte[] pretendImageData = {0, 0, 0, 1, 1, 1, 2, 2, 2, 3};
+	private Random generator = new Random(System.currentTimeMillis());
 	
 	/**
 	 * @author Jejo Koola
 	 * This function loads up an image object from our resources folder
 	 */
 	@Override
+	
 	protected void setUp() throws IOException {
 		/*InputStream is = this.getClass().getClassLoader().getResourceAsStream(TEST_IMAGE_1);
 		// this.getClass().getClassLoader().getR
@@ -105,6 +107,7 @@ public class PictureSvcClientApiTest extends TestCase {
 		// pic.setImageFromStream(iis);
 		// pic.setImage(pretendImageData);
 		cap = new Caption("test caption");
+		cap.setId(generator.nextLong());
 		
 		
 	}

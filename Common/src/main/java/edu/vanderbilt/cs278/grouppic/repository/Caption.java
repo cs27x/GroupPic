@@ -18,7 +18,6 @@ import javax.persistence.ManyToOne;
 public class Caption {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     private long pictureId;

@@ -5,7 +5,6 @@ import java.util.Collection;
 import edu.vanderbilt.cs278.grouppic.repository.Caption;
 import edu.vanderbilt.cs278.grouppic.repository.Picture;
 import edu.vanderbilt.cs278.grouppic.repository.PicturePreview;
-
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
@@ -42,7 +41,7 @@ public interface PictureSvcApi {
     public Caption postCaption(@Body Caption c, @Path ("id") long id);
     
     @POST(POST_COMMENT_PATH +"/{cd}"+"/like")
-    public Caption likeCaption(@Path ("cd") long id);
+    public Void likeCaption(@Path ("cd") long id);
     
     
     @DELETE(PICTURE_PATH + "/{id}")
