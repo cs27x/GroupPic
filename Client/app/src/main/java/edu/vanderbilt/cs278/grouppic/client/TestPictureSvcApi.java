@@ -16,7 +16,7 @@ import edu.vanderbilt.cs278.grouppic.repository.PicturePreview;
  * Implementation of the PictureSvcApi with randomly generated Pictures
  *  for use in frontend testing
  */
-public class TestPictureSvcApi implements PictureSvcApi {
+public class TestPictureSvcApi{
 
     private ArrayList<Picture> pictures;
     private ArrayList<Caption> captions;

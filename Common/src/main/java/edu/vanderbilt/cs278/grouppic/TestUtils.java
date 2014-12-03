@@ -44,7 +44,7 @@ public class TestUtils {
         } catch (Exception e) {
         }
 
-        return new Picture(USERS[user], new Date().getTime(), new ArrayList<Long>(), new ArrayList<Caption>(), i);
+        return new Picture(USERS[user], new Date().getTime(), new ArrayList<String>(), new ArrayList<Caption>(), i);
     }
 
     synchronized private static byte[] readBytes(InputStream inputStream) throws IOException {

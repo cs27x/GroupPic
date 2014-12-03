@@ -6,19 +6,15 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.imageio.ImageIO;
 import javax.persistence.CascadeType;
-import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 import com.google.common.base.Objects;
-import com.google.common.base.Strings;
 import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
 import com.sun.org.apache.xml.internal.security.utils.Base64;
 
@@ -49,7 +45,7 @@ public class Picture {
      * Collection of strings representing the ids of the recipients
      */
     @ElementCollection
-    private Collection<Long> recipients;
+    private Collection<String> recipients;
 
     /**
      * Either a string of the id of captions, or a change to a list of caption objects
@@ -65,11 +61,11 @@ public class Picture {
 
     public Picture() { 
     	captions = new ArrayList<Caption>();
-    	recipients = new ArrayList<Long>();
+    	recipients = new ArrayList<String>();
     	image = "";
     }
 
-    public Picture(String sender, long date, Collection<Long> recipients, Collection<Caption> captions, byte[] image) {
+    public Picture(String sender, long date, Collection<String> recipients, Collection<Caption> captions, byte[] image) {
         this.sender = sender;
         this.date = date;
         this.recipients = recipients;
@@ -93,14 +89,12 @@ public class Picture {
 
     public void setDate(long date) { this.date = date; }
 
-    public Collection<Long> getRecipients() { return recipients; }
+    public Collection<String> getRecipients() { return recipients; }
 
-    public void setRecipients(Collection<Long> recipients) { this.recipients = recipients; }
+    public void setRecipients(Collection<String> recipients) { this.recipients = recipients; }
 
     public void setCaptions(Collection<Caption> captions) { this.captions = captions; }
-    
-    public void addCaption(Caption caption) { captions.add(caption); caption.setPicture(this); }
-    
+        
     public Collection<Caption> getCaptions() { return captions; }
 
     public String getImage() { return image; }

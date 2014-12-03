@@ -20,7 +20,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
-import org.magnum.videoup.client.R;
 
 
 import butterknife.ButterKnife;
@@ -80,7 +79,10 @@ public class PicturePostActivity extends Activity {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     currentImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
                     byte[] byteArray = stream.toByteArray();
-                    Picture p = new Picture("Current Test User", new Date().getTime(), new ArrayList<Long>(),
+                    ArrayList<String> users = new ArrayList<String>();
+                    users.add("user0");
+                    users.add("user1");
+                    Picture p = new Picture("Current Test User", new Date().getTime(), users,
                             new ArrayList<Caption>(), byteArray);
                     p.setId(r.nextLong());
                     Log.d("Send Picture", p.toString() + " id: " + p.getId());

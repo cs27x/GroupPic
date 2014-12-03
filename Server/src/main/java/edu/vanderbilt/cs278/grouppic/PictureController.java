@@ -1,18 +1,21 @@
 package edu.vanderbilt.cs278.grouppic;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.vanderbilt.cs278.grouppic.client.PictureSvcApi;
 import edu.vanderbilt.cs278.grouppic.repository.Caption;
+import edu.vanderbilt.cs278.grouppic.repository.CaptionRepository;
 import edu.vanderbilt.cs278.grouppic.repository.Picture;
 import edu.vanderbilt.cs278.grouppic.repository.PictureRepository;
 
@@ -21,9 +24,12 @@ public class PictureController implements PictureSvcApi {
 	
 	@Autowired
 	private PictureRepository pictureRepo;
+	@Autowired
+	private CaptionRepository captionRepo;
 	
-	public PictureController(PictureRepository p) {
+	public PictureController(PictureRepository p, CaptionRepository c) {
 		pictureRepo = p;
+		captionRepo = c;
 	}
 	public PictureController() {
 		
@@ -33,7 +39,18 @@ public class PictureController implements PictureSvcApi {
 	@RequestMapping(value="/picture", method=RequestMethod.GET)
 	@ResponseBody
 	public Collection<Picture> getPictureList() {
-		return pictureRepo.findAll();
+		Collection<Picture> pics = pictureRepo.findAll();
+		if (pics != null) {
+			Collection<Picture> picsForUser = new ArrayList<Picture>(pics.size());
+			String curUser = this.getCurrentUser();
+			for (Picture pic: pics) {
+				if (userAuthorizedToViewPicture(pic, curUser))
+					picsForUser.add(pic);
+			}
+			return picsForUser;
+		}
+		else
+			return pics;
 	}
 
 	@Override
@@ -48,27 +65,69 @@ public class PictureController implements PictureSvcApi {
 	@RequestMapping(value="/picture/{id}", method=RequestMethod.GET)
 	@ResponseBody
 	public Picture getPictureWithId(@PathVariable("id") long id) {
-		return pictureRepo.findOne(id);
+		Picture pic =  pictureRepo.findOne(id);		
+		if (userAuthorizedToViewPicture(pic, this.getCurrentUser()))
+			return pic;
+		else
+			throw new UserAuthenticationError();
 	}
 
 	@Override
-	@RequestMapping(value="/captions/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/picture/{id}/comments", method=RequestMethod.GET)
 	@ResponseBody
 	public Collection<Caption> getComments(@PathVariable("id") long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return captionRepo.findByCurrentPictureId(id);
+	}
+	
+	//@Override
+	@RequestMapping(value="/test", method=RequestMethod.GET)
+	@ResponseBody
+	public String getTest() {
+		return getCurrentUser();
 	}
 
 	@Override
-	public Caption postCaption(Caption c) {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="/picture/{id}/comments", method=RequestMethod.POST)
+	public Caption postCaption(Caption c, @PathVariable ("id") long id) {
+		c.setPictureId(id);
+		return captionRepo.save(c);
 	}
 
+
 	@Override
+	@RequestMapping(value="/picture/{id}/comments"+"/{cd}"+"/like", method = RequestMethod.POST)
+	public Void likeCaption(@PathVariable ("cd") long cd) {
+		captionRepo.findOne(cd).upvote();
+		return null;
+	}
+	@Override
+
+	@RequestMapping(value="/picture/{id}", method=RequestMethod.DELETE)
 	public Void deletePicture(long id) {
-		// TODO Auto-generated method stub
+		pictureRepo.delete(id);
 		return null;
 	}
 	
+	protected String getCurrentUser() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal == null) {
+			throw new UserAuthenticationError();
+		}
+		String username;
+		try {
+			if (principal instanceof UserDetails) {
+			   username = ((UserDetails)principal).getUsername();
+			} else {
+			   username = principal.toString();
+			}	
+		}
+		catch (Exception e) {
+			throw new UserAuthenticationError();
+		}
+		return username;
+	}
+	
+	protected boolean userAuthorizedToViewPicture(Picture pic, String user) {
+		return pic.getSender().equals(user) || pic.getRecipients().contains(user);
+	}
 }

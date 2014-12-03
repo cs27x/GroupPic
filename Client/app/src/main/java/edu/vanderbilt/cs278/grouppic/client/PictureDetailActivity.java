@@ -15,7 +15,6 @@ import android.widget.Toast;
 import com.sun.org.apache.xml.internal.security.exceptions.Base64DecodingException;
 
 import java.util.concurrent.Callable;
-import org.magnum.videoup.client.R;
 
 import java.util.ArrayList;
 import java.util.Collection;
