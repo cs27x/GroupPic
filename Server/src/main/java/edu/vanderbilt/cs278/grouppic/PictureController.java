@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,14 +58,12 @@ public class PictureController implements PictureSvcApi {
 	@RequestMapping(value="/picture/{id}/comments", method=RequestMethod.GET)
 	@ResponseBody
 	public Collection<Caption> getComments(@PathVariable("id") long id) {
-		// TODO Auto-generated method stub
 		return captionRepo.findByCurrentPictureId(id);
-		}
+	}
 
 	@Override
 	@RequestMapping(value="/picture/{id}/comments", method=RequestMethod.POST)
 	public Caption postCaption(Caption c, @PathVariable ("id") long id) {
-		// TODO Auto-generated method stub
 		c.setPictureId(id);
 		return captionRepo.save(c);
 	}
@@ -76,14 +73,12 @@ public class PictureController implements PictureSvcApi {
 	@RequestMapping(value="/picture/{id}/comments"+"/{cd}"+"/like", method = RequestMethod.POST)
 	public Void likeCaption(@PathVariable ("cd") long cd) {
 		captionRepo.findOne(cd).upvote();
-		// TODO Auto-generated method stub
 		return null;
 	}
 	@Override
 
 	@RequestMapping(value="/picture/{id}", method=RequestMethod.DELETE)
 	public Void deletePicture(long id) {
-		// TODO Auto-generated method stub
 		pictureRepo.delete(id);
 		return null;
 	}

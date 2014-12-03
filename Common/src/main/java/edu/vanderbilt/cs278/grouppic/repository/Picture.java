@@ -98,9 +98,7 @@ public class Picture {
     public void setRecipients(Collection<Long> recipients) { this.recipients = recipients; }
 
     public void setCaptions(Collection<Caption> captions) { this.captions = captions; }
-    
-    public void addCaption(Caption caption) { captions.add(caption); caption.setPicture(this); }
-    
+        
     public Collection<Caption> getCaptions() { return captions; }
 
     public String getImage() { return image; }

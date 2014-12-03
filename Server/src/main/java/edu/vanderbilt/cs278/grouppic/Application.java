@@ -2,38 +2,19 @@ package edu.vanderbilt.cs278.grouppic;
 
 import java.net.UnknownHostException;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.mongodb.MongoDbFactory;
-import org.springframework.data.mongodb.core.MongoFactoryBean;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
-import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
-import org.springframework.data.rest.core.config.ResourceMappingConfiguration;
-import org.springframework.data.rest.webmvc.config.RepositoryRestMvcConfiguration;
-import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mongodb.Mongo;
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
 import com.mongodb.MongoException;
-import com.mongodb.MongoOptions;
 import com.mongodb.MongoURI;
-
-import edu.vanderbilt.cs278.grouppic.json.ResourcesMapper;
-import edu.vanderbilt.cs278.grouppic.repository.Caption;
-import edu.vanderbilt.cs278.grouppic.repository.CaptionRepository;
-import edu.vanderbilt.cs278.grouppic.repository.Picture;
-import edu.vanderbilt.cs278.grouppic.repository.PictureRepository;
 
 //Tell Spring to automatically inject any dependencies that are marked in
 //our classes with @Autowired
@@ -79,15 +60,6 @@ public class Application {
 	//
 	// See the ResourcesMapper class for more details.
 	
-	/*@Autowired
-	private ObjectMapper myObjectMapper;
-	@Bean*/
-	
-	@Bean	
-	public ObjectMapper resourceMapper() {
-		return new ResourcesMapper();
-	}
-	
     @SuppressWarnings("deprecation")
 	public @Bean MongoDbFactory mongoDbFactory() throws MongoException, UnknownHostException {
         return new SimpleMongoDbFactory(new MongoURI("mongodb://grouppic:cs278@ds045087.mongolab.com:45087/grouppic"));
@@ -96,19 +68,5 @@ public class Application {
     public @Bean MongoTemplate mongoTemplate() throws Exception {
         return new MongoTemplate(mongoDbFactory());
     }
-	
-	
-	/*@Bean
-	@Override
-	public ObjectMapper objectMapper() {
-		return new ResourcesMapper();
-	}*/
-/*
-	@Override
-	protected void configureRepositoryRestConfiguration(
-			RepositoryRestConfiguration config) {
-		config.exposeIdsFor(Picture.class, Caption.class );
-	}
-	*/
 
 }

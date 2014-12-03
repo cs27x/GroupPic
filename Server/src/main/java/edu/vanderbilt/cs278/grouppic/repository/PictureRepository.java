@@ -3,11 +3,7 @@ package edu.vanderbilt.cs278.grouppic.repository;
 import java.util.Collection;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
-
-import edu.vanderbilt.cs278.grouppic.client.*;
 
 public interface PictureRepository  extends MongoRepository<Picture, Long> /*, PictureRepoCaptionInterface */{
 	public Collection<Picture> findBySender(
@@ -15,7 +11,5 @@ public interface PictureRepository  extends MongoRepository<Picture, Long> /*, P
 			// parameter it should use to fill in the "title" variable used to
 			// search for Videos
 			@Param("sender") String sender);
-	
-	// public Collection<String> captions();
 	
 }

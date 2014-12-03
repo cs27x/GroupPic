@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import edu.vanderbilt.cs278.grouppic.repository.Caption;
 import edu.vanderbilt.cs278.grouppic.repository.Picture;
-import edu.vanderbilt.cs278.grouppic.repository.PicturePreview;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
