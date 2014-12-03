@@ -45,7 +45,7 @@ public class Picture {
      * Collection of strings representing the ids of the recipients
      */
     @ElementCollection
-    private Collection<Long> recipients;
+    private Collection<String> recipients;
 
     /**
      * Either a string of the id of captions, or a change to a list of caption objects
@@ -61,11 +61,11 @@ public class Picture {
 
     public Picture() { 
     	captions = new ArrayList<Caption>();
-    	recipients = new ArrayList<Long>();
+    	recipients = new ArrayList<String>();
     	image = "";
     }
 
-    public Picture(String sender, long date, Collection<Long> recipients, Collection<Caption> captions, byte[] image) {
+    public Picture(String sender, long date, Collection<String> recipients, Collection<Caption> captions, byte[] image) {
         this.sender = sender;
         this.date = date;
         this.recipients = recipients;
@@ -89,9 +89,9 @@ public class Picture {
 
     public void setDate(long date) { this.date = date; }
 
-    public Collection<Long> getRecipients() { return recipients; }
+    public Collection<String> getRecipients() { return recipients; }
 
-    public void setRecipients(Collection<Long> recipients) { this.recipients = recipients; }
+    public void setRecipients(Collection<String> recipients) { this.recipients = recipients; }
 
     public void setCaptions(Collection<Caption> captions) { this.captions = captions; }
         

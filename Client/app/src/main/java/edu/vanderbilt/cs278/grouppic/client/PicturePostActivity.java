@@ -82,7 +82,7 @@ public class PicturePostActivity extends Activity {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     currentImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
                     byte[] byteArray = stream.toByteArray();
-                    Picture p = new Picture("Current Test User", new Date().getTime(), new ArrayList<Long>(),
+                    Picture p = new Picture("Current Test User", new Date().getTime(), new ArrayList<String>(),
                             new ArrayList<Caption>(), byteArray);
                     p.setId(r.nextLong());
                     Log.d("Send Picture", p.toString() + " id: " + p.getId());
