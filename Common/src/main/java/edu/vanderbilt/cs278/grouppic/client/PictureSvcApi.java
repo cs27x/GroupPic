@@ -4,8 +4,6 @@ import java.util.Collection;
 
 import edu.vanderbilt.cs278.grouppic.repository.Caption;
 import edu.vanderbilt.cs278.grouppic.repository.Picture;
-import edu.vanderbilt.cs278.grouppic.repository.PicturePreview;
-
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.POST;
@@ -24,11 +22,13 @@ public interface PictureSvcApi {
 
     public static final String COMMENT_PATH = "/comments";
 
-    public static final String POST_COMMENT_PATH = PICTURE_PATH + "/comment";
+    // public static final String POST_COMMENT_PATH = PICTURE_PATH + "/comment";
     
     public static final String LOGIN_PATH = "/login";
     
     public static final String LOGOUT_PATH = "/logout";
+
+    public static final String POST_COMMENT_PATH = PICTURE_PATH +"/{id}"+ "/comments";
 
     @GET(PICTURE_PATH)
     public Collection<Picture> getPictureList();
@@ -39,11 +39,15 @@ public interface PictureSvcApi {
     @GET(PICTURE_PATH + "/{id}")
     public Picture getPictureWithId(@Path("id") long id);
 
-    @GET(PICTURE_PATH + "/{id}" + COMMENT_PATH)
+    @GET(POST_COMMENT_PATH)
     public Collection<Caption> getComments(@Path("id") long id);
 
     @POST(POST_COMMENT_PATH)
-    public Caption postCaption(@Body Caption c);
+    public Caption postCaption(@Body Caption c, @Path ("id") long id);
+    
+    @POST(POST_COMMENT_PATH +"/{cd}"+"/like")
+    public Void likeCaption(@Path ("cd") long id);
+    
     
     @DELETE(PICTURE_PATH + "/{id}")
     public Void deletePicture(@Path("id") long id);

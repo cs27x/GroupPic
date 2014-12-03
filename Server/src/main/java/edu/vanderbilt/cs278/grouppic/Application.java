@@ -6,6 +6,7 @@ import java.net.UnknownHostException;
 import org.apache.catalina.connector.Connector;
 import org.apache.coyote.http11.Http11NioProtocol;
 import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
@@ -16,6 +17,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
@@ -27,6 +29,9 @@ import com.mongodb.MongoException;
 import com.mongodb.MongoURI;
 
 import edu.vanderbilt.cs278.grouppic.json.ResourcesMapper;
+
+import com.mongodb.MongoException;
+import com.mongodb.MongoURI;
 
 //Tell Spring to automatically inject any dependencies that are marked in
 //our classes with @Autowired
@@ -73,15 +78,6 @@ public class Application {
 	//
 	// See the ResourcesMapper class for more details.
 	
-	/*@Autowired
-	private ObjectMapper myObjectMapper;
-	@Bean*/
-	
-	@Bean	
-	public ObjectMapper resourceMapper() {
-		return new ResourcesMapper();
-	}
-	
     @SuppressWarnings("deprecation")
 	public @Bean MongoDbFactory mongoDbFactory() throws MongoException, UnknownHostException {
         return new SimpleMongoDbFactory(new MongoURI("mongodb://grouppic:cs278@ds045087.mongolab.com:45087/grouppic"));
@@ -90,20 +86,6 @@ public class Application {
     public @Bean MongoTemplate mongoTemplate() throws Exception {
         return new MongoTemplate(mongoDbFactory());
     }
-	
-	
-	/*@Bean
-	@Override
-	public ObjectMapper objectMapper() {
-		return new ResourcesMapper();
-	}*/
-/*
-	@Override
-	protected void configureRepositoryRestConfiguration(
-			RepositoryRestConfiguration config) {
-		config.exposeIdsFor(Picture.class, Caption.class );
-	}
-	*/
 
     
  // This version uses the Tomcat web container and configures it to

@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.vanderbilt.cs278.grouppic.client.PictureSvcApi;
 import edu.vanderbilt.cs278.grouppic.repository.Caption;
+import edu.vanderbilt.cs278.grouppic.repository.CaptionRepository;
 import edu.vanderbilt.cs278.grouppic.repository.Picture;
 import edu.vanderbilt.cs278.grouppic.repository.PictureRepository;
 
@@ -23,9 +23,12 @@ public class PictureController implements PictureSvcApi {
 	
 	@Autowired
 	private PictureRepository pictureRepo;
+	@Autowired
+	private CaptionRepository captionRepo;
 	
-	public PictureController(PictureRepository p) {
+	public PictureController(PictureRepository p, CaptionRepository c) {
 		pictureRepo = p;
+		captionRepo = c;
 	}
 	public PictureController() {
 		
@@ -54,11 +57,10 @@ public class PictureController implements PictureSvcApi {
 	}
 
 	@Override
-	@RequestMapping(value="/captions/{id}", method=RequestMethod.GET)
+	@RequestMapping(value="/picture/{id}/comments", method=RequestMethod.GET)
 	@ResponseBody
 	public Collection<Caption> getComments(@PathVariable("id") long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return captionRepo.findByCurrentPictureId(id);
 	}
 	
 	//@Override
@@ -69,14 +71,24 @@ public class PictureController implements PictureSvcApi {
 	}
 
 	@Override
-	public Caption postCaption(Caption c) {
-		// TODO Auto-generated method stub
-		return null;
+	@RequestMapping(value="/picture/{id}/comments", method=RequestMethod.POST)
+	public Caption postCaption(Caption c, @PathVariable ("id") long id) {
+		c.setPictureId(id);
+		return captionRepo.save(c);
 	}
 
+
 	@Override
+	@RequestMapping(value="/picture/{id}/comments"+"/{cd}"+"/like", method = RequestMethod.POST)
+	public Void likeCaption(@PathVariable ("cd") long cd) {
+		captionRepo.findOne(cd).upvote();
+		return null;
+	}
+	@Override
+
+	@RequestMapping(value="/picture/{id}", method=RequestMethod.DELETE)
 	public Void deletePicture(long id) {
-		// TODO Auto-generated method stub
+		pictureRepo.delete(id);
 		return null;
 	}
 	
@@ -98,5 +110,4 @@ public class PictureController implements PictureSvcApi {
 		}
 		return username;
 	}
-	
 }

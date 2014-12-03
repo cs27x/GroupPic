@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Random;
 
 import org.junit.Test;
 
@@ -36,7 +37,6 @@ import edu.vanderbilt.cs278.grouppic.client.PictureSvcApi;
 import retrofit.RestAdapter;
 import retrofit.RestAdapter.LogLevel;
 import retrofit.converter.GsonConverter;
-
 
 import java.lang.reflect.Type;
 
@@ -83,14 +83,18 @@ public class PictureSvcClientApiTest extends TestCase {
 	private static final String TEST_IMAGE_1 = "/jackson-poster.jpg";
 	private static final String TEST_IMAGE_2 = "jacksonasdfasdf-poster.jpg";
 
+	
 	private Picture pic;
+	private Caption cap;
 	private byte[] pretendImageData = {0, 0, 0, 1, 1, 1, 2, 2, 2, 3};
+	private Random generator = new Random(System.currentTimeMillis());
 	
 	/**
 	 * @author Jejo Koola
 	 * This function loads up an image object from our resources folder
 	 */
 	@Override
+	
 	protected void setUp() throws IOException {
 		/*InputStream is = this.getClass().getClassLoader().getResourceAsStream(TEST_IMAGE_1);
 		// this.getClass().getClassLoader().getR
@@ -102,6 +106,8 @@ public class PictureSvcClientApiTest extends TestCase {
 		// System.out.println(iis.length());
 		// pic.setImageFromStream(iis);
 		// pic.setImage(pretendImageData);
+		cap = new Caption("test caption");
+		cap.setId(generator.nextLong());
 		
 		
 	}
@@ -122,11 +128,18 @@ public class PictureSvcClientApiTest extends TestCase {
 		Collection<Picture> pics = picService.getPictureList();
 		assertTrue(pics.size() > 0);
 		
+		for (Picture pic: pics){
+			
+			
+			picService.postCaption(cap, pic.getId());
+		}
+		
 		System.err.println("ORIGINAL: " + pic.toString());
 		for (Picture pic: pics) {
 			System.err.println(pic.toString());
 		}
 		assertTrue(pics.contains(pic));
+		
 		
 		for(Picture v : pics){
 			picService.deletePicture(v.getId());
@@ -134,6 +147,8 @@ public class PictureSvcClientApiTest extends TestCase {
 		
 		pics = picService.getPictureList();
 		assertEquals(0, pics.size());
+		
+		
 	}
 
 	/*
