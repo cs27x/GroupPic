@@ -3,8 +3,7 @@ package edu.vanderbilt.cs278.grouppic.client;
 /**
  * Created by andrewbachman on 10/28/14.
  */
-public class PictureSvc {
-=======
+
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -32,7 +31,7 @@ import java.util.Date;
  */
 public class PictureSvc {
 
-    public static final String SERVER = "http://192.168.56.1:8080";
+    public static final String SERVER = "http://10.0.2.2:8080";
 
     private static final Gson gson = new GsonBuilder()
             .create();
