@@ -12,7 +12,7 @@ import edu.vanderbilt.cs278.grouppic.client.*;
 @RepositoryRestResource(collectionResourceRel="pictures")
 public interface CaptionRepository  extends MongoRepository<Caption, Long> {	
 	
-	public Collection<Caption> findByPicId( @Param ("id") long picId);
+	public Collection<Caption> findByCurrentPictureId( long picId);
 	
 	
 	

@@ -20,7 +20,7 @@ public class Caption {
     @Id
     private long id;
 
-    private long pictureId;
+    private long currentPictureId;
     private String user;
     private int votes;
     private String content;
@@ -72,9 +72,9 @@ public class Caption {
     
     public void setDate(long date) { this.date = date; }
 
-    public void setPictureId(long id) { this.pictureId = id; }
+    public void setPictureId(long id) { this.currentPictureId = id; }
     
-    public long getPictureId() {return pictureId; } 
+    public long getPictureId() {return currentPictureId; } 
     public void upvote() { ++votes; }
     public void downvote() { --votes; }
 
