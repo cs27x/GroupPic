@@ -6,7 +6,6 @@ import java.net.UnknownHostException;
 import org.apache.catalina.connector.Connector;
 import org.apache.coyote.http11.Http11NioProtocol;
 import org.springframework.beans.factory.annotation.Value;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
@@ -17,22 +16,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
 import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.MongoException;
 import com.mongodb.MongoURI;
 
-import edu.vanderbilt.cs278.grouppic.json.ResourcesMapper;
-
-import com.mongodb.MongoException;
-import com.mongodb.MongoURI;
-
+import edu.vanderbilt.cs278.grouppic.auth.OAuth2SecurityConfiguration;
 //Tell Spring to automatically inject any dependencies that are marked in
 //our classes with @Autowired
 @EnableAutoConfiguration
@@ -52,7 +45,7 @@ import com.mongodb.MongoURI;
 @ComponentScan
 @EnableMongoRepositories
 //@Import(RepositoryRestMvcConfiguration.class)
-@Import(SecurityConfiguration.class)
+@Import(OAuth2SecurityConfiguration.class)
 public class Application {
 
 	// Tell Spring to launch our app!

@@ -24,7 +24,7 @@
                 android:value="edu.vanderbilt.cs278.grouppic.client.MainListView" />
         </activity>
         <activity
-            android:name=".LoginScreenActivity"
+            android:name="edu.vanderbilt.cs278.grouppic.client.LoginScreenActivity"
             android:label="@string/app_name" >
         </activity>
         <activity

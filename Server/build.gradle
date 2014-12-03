@@ -45,6 +45,8 @@ dependencies {
     compile("org.springframework.data:spring-data-rest-webmvc")
     compile("org.springframework.data:spring-data-mongodb")
     compile("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
+    compile("org.springframework.security.oauth:spring-security-oauth2:2.0.0.RC2")
+    compile("org.springframework.security.oauth:spring-security-oauth2-javaconfig:1.0.0.M1")
     
     compile("org.hsqldb:hsqldb")
 	compile("com.squareup.retrofit:retrofit:1.6.1")

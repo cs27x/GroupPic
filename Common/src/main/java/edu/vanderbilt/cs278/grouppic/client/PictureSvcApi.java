@@ -30,6 +30,12 @@ public interface PictureSvcApi {
 
     public static final String POST_COMMENT_PATH = PICTURE_PATH +"/{id}"+ "/comments";
 
+    public static final String TOKEN_PATH = "/oauth/token";
+
+    public static final String PASSWORD_PARAMETER = "password";
+
+    public static final String USERNAME_PARAMETER = "username";
+
     @GET(PICTURE_PATH)
     public Collection<Picture> getPictureList();
 
