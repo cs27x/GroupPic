@@ -1,5 +1,6 @@
 package edu.vanderbilt.cs278.grouppic;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,18 @@ public class PictureController implements PictureSvcApi {
 	@RequestMapping(value="/picture", method=RequestMethod.GET)
 	@ResponseBody
 	public Collection<Picture> getPictureList() {
-		return pictureRepo.findAll();
+		Collection<Picture> pics = pictureRepo.findAll();
+		if (pics != null) {
+			Collection<Picture> picsForUser = new ArrayList<Picture>(pics.size());
+			String curUser = this.getCurrentUser();
+			for (Picture pic: pics) {
+				if (pic.getRecipients().contains(curUser))
+					picsForUser.add(pic);
+			}
+			return picsForUser;
+		}
+		else
+			return pics;
 	}
 
 	@Override
