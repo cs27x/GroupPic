@@ -10,10 +10,6 @@ import android.util.Log;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.magnum.videoup.client.R;
-import org.magnum.videoup.client.VideoListActivity;
-import org.magnum.videoup.client.VideoSvc;
-
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
