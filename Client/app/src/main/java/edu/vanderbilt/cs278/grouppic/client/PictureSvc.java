@@ -30,7 +30,8 @@ import java.util.Date;
  */
 public class PictureSvc {
 
-    public static final String SERVER = "http://10.0.2.2:8080";
+    public static final String SERVER = "http://10.0.2.2:8443";
+    public static final String CLIENT_ID = "mobile";
 
     private static final Gson gson = new GsonBuilder()
             .create();
