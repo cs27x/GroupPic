@@ -44,7 +44,7 @@ public class PictureController implements PictureSvcApi {
 			Collection<Picture> picsForUser = new ArrayList<Picture>(pics.size());
 			String curUser = this.getCurrentUser();
 			for (Picture pic: pics) {
-				if (pic.getRecipients().contains(curUser))
+				if (userAuthorizedToViewPicture(pic, curUser))
 					picsForUser.add(pic);
 			}
 			return picsForUser;
@@ -65,9 +65,8 @@ public class PictureController implements PictureSvcApi {
 	@RequestMapping(value="/picture/{id}", method=RequestMethod.GET)
 	@ResponseBody
 	public Picture getPictureWithId(@PathVariable("id") long id) {
-		Picture pic =  pictureRepo.findOne(id);
-		String curUser = this.getCurrentUser();
-		if (pic.getRecipients().contains(curUser))
+		Picture pic =  pictureRepo.findOne(id);		
+		if (userAuthorizedToViewPicture(pic, this.getCurrentUser()))
 			return pic;
 		else
 			throw new UserAuthenticationError();
@@ -126,5 +125,9 @@ public class PictureController implements PictureSvcApi {
 			throw new UserAuthenticationError();
 		}
 		return username;
+	}
+	
+	protected boolean userAuthorizedToViewPicture(Picture pic, String user) {
+		return pic.getSender().equals(user) || pic.getRecipients().contains(user);
 	}
 }
