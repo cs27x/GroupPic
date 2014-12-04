@@ -87,7 +87,7 @@ public class PictureDetailActivity extends Activity {
                 else {
                     Caption newCap = new Caption(newCaption);
                     newCap.setPictureId(currentPicture_);
-                    postCaption(newCap);
+                    //postCaption(newCap);
                 }
             }
         });
@@ -175,7 +175,7 @@ public class PictureDetailActivity extends Activity {
             );
         }
     }
-
+/*
     private void postCaption(Caption cap) {
         final PictureSvcApi svc = PictureSvc.getOrShowLogin(this);
         final Caption capt = cap;
@@ -204,4 +204,5 @@ public class PictureDetailActivity extends Activity {
             );
         }
     }
+    */
 }
