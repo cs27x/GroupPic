@@ -45,7 +45,7 @@ public class PictureSvc {
         }
     }
 
-    public static synchronized PictureSvcApi init(String user, String password) {
+    public static synchronized PictureSvcApi init(String user, String password, String server) {
 
         // This section is commented out for testing purposes
         // When the server is running it should be replaced

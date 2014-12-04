@@ -51,7 +51,7 @@ public class LoginScreenActivity extends Activity {
 		String pass = password_.getText().toString();
 		String server = server_.getText().toString();
 
-		final PictureSvcApi svc = PictureSvc.init(user, pass);
+		final PictureSvcApi svc = PictureSvc.init(user, pass, server);
 
 		CallableTask.invoke(new Callable<Collection<Picture>>() {
 
