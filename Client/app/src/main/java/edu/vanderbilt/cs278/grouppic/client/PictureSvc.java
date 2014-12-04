@@ -57,7 +57,7 @@ public class PictureSvc {
                 .setClientId(CLIENT_ID)
                 .setClient(
                         new ApacheClient(new EasyHttpClient()))
-                .setEndpoint(SERVER).setLogLevel(LogLevel.FULL).build()
+                .setEndpoint(server).setLogLevel(LogLevel.FULL).build()
                 .create(PictureSvcApi.class);
 
         Log.d("TEST API", "CREATED");
