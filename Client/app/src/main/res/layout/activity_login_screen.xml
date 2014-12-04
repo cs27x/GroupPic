@@ -8,11 +8,37 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".LoginScreenActivity" >
 
+    <TextView
+        android:id="@+id/login_text_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="#ffcc00"
+        android:text="Group"
+        android:textColor="#000000"
+        android:textSize="50sp" />
+
+    <TextView
+        android:id="@+id/login_text_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart = "@+id/login_text_group"
+        android:layout_alignLeft = "@+id/login_text_group"
+        android:layout_alignEnd="@+id/login_text_group"
+        android:layout_alignRight = "@+id/login_text_group"
+        android:layout_below="@+id/login_text_group"
+        android:background="#000000"
+        android:gravity="center"
+        android:text="Pic"
+        android:textColor="#ffffff"
+        android:textSize="50sp" />
+    
     <EditText
         android:id="@+id/userName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below = "@+id/login_text_pic"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="120dp"
         android:ems="10"

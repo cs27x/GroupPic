@@ -15,6 +15,8 @@ import butterknife.InjectView;
 import butterknife.OnClick;
 import edu.vanderbilt.cs278.grouppic.client.CallableTask;
 import edu.vanderbilt.cs278.grouppic.client.TaskCallback;
+import edu.vanderbilt.cs278.grouppic.client.UserSvcApi;
+
 
 /**
  * 
@@ -27,8 +29,15 @@ import edu.vanderbilt.cs278.grouppic.client.TaskCallback;
  * http://jakewharton.github.io/butterknife/ide-eclipse.html
  * 
  */
-public class LoginScreenActivity extends Activity {
-    /*
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+
+
+public class LoginScreenActivity extends Activity{
 
 	@InjectView(R.id.userName)
 	protected EditText userName_;
@@ -84,5 +93,3 @@ public class LoginScreenActivity extends Activity {
         });
 	}
 	*/
-
-}
