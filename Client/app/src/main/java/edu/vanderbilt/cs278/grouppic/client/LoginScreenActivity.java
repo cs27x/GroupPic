@@ -67,7 +67,7 @@ public class LoginScreenActivity extends Activity {
 				// can talk to the server, open up the picture listing
 				startActivity(new Intent(
 						LoginScreenActivity.this,
-						MainListView.class));
+						MainNewsFeedActivity.class));
 			}
 
 			@Override
