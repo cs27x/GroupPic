@@ -51,7 +51,10 @@ public class MainNewsFeedActivity extends Activity {
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Toast.makeText(MainNewsFeedActivity.this, "" + position, Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getBaseContext(), PictureDetailActivity.class);
+                intent.putExtra("picture_id",imageAdapter_.getItemId(position));
+                startActivity(intent);
+
             }
         });
 

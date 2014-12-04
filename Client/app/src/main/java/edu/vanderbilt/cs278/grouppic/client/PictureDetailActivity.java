@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -70,6 +73,24 @@ public class PictureDetailActivity extends Activity {
 
         commentList_.setAdapter(listViewAdapter);
 
+        Button capButton = (Button) findViewById(R.id.capButton);
+        EditText capText = (EditText) findViewById(R.id.capText);
+        capButton.setOnClickListener( new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                EditText capText = (EditText) findViewById(R.id.capText);
+                String newCaption = capText.getText().toString();
+                if (newCaption == null) {
+                    Toast.makeText(getApplicationContext(), "Please insert a caption", Toast.LENGTH_SHORT);
+                }
+                else {
+                    Caption newCap = new Caption(newCaption);
+                    newCap.setPictureId(currentPicture_);
+                    postCaption(newCap);
+                }
+            }
+        });
     }
 
 
@@ -147,6 +168,35 @@ public class PictureDetailActivity extends Activity {
                                         Toast.makeText(
                                                 PictureDetailActivity.this,
                                                 "Unable to fetch the video list, please login again.",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+            );
+        }
+    }
+
+    private void postCaption(Caption cap) {
+        final PictureSvcApi svc = PictureSvc.getOrShowLogin(this);
+        final Caption capt = cap;
+        if (svc != null) {
+            CallableTask.invoke(new Callable<Collection<Caption>>() {
+                                    @Override
+                                    public Collection<Caption> call() throws Exception {
+                                        return svc.postCaption(capt, capt.getId());
+                                        //TODO help me!
+                                    }
+                                }, new TaskCallback<Caption>() {
+                                    @Override
+                                    public void success(Caption c) {
+                                    }
+
+                                    @Override
+                                    public void error(Exception e) {
+
+                                        Toast.makeText(
+                                                PictureDetailActivity.this,
+                                                "error posting caption",
                                                 Toast.LENGTH_SHORT).show();
                                     }
                                 }
