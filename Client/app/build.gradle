@@ -1,9 +1,16 @@
 apply plugin: "com.android.application"
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'grouppic android key'
+            keyPassword 'grouppic'
+            storeFile file('/Users/johndoe/Documents/workspace/GroupPic/grouppic.keystore.jks')
+            storePassword 'grouppic'
+        }
+    }
     compileSdkVersion 20
     buildToolsVersion "20.0.0"
-
     defaultConfig {
         applicationId "com.magnum.videoup"
         minSdkVersion 19
@@ -15,16 +22,16 @@ android {
         release {
             runProguard false
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.config
         }
     }
 }
 
 
 dependencies {
-    compile project(":Common")
-
-    compile("com.jakewharton:butterknife:5.1.2")
-    compile fileTree(dir: "libs", include: ["*.jar"])
+    compile project(':Common')
+    compile 'com.jakewharton:butterknife:5.1.2'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
 android {
