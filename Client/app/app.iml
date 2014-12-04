@@ -84,6 +84,8 @@
     <orderEntry type="library" exported="" name="hibernate-jpa-2.0-api-1.0.1.Final" level="project" />
     <orderEntry type="library" exported="" name="commons-io-2.4" level="project" />
     <orderEntry type="library" exported="" name="jackson-module-jaxb-annotations-2.4.0" level="project" />
+    <orderEntry type="library" exported="" name="support-v4-21.0.0" level="project" />
+    <orderEntry type="library" exported="" name="floatingactionbutton-1.0.7" level="project" />
     <orderEntry type="library" exported="" name="retrofit-1.6.1" level="project" />
     <orderEntry type="library" exported="" name="stax2-api-3.1.4" level="project" />
     <orderEntry type="library" exported="" name="guava-17.0" level="project" />
@@ -92,8 +94,10 @@
     <orderEntry type="library" exported="" name="jackson-core-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="jackson-databind-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="jackson-dataformat-xml-2.4.0" level="project" />
+    <orderEntry type="library" exported="" name="recyclerview-v7-21.0.0" level="project" />
     <orderEntry type="library" exported="" name="jackson-annotations-2.4.0" level="project" />
     <orderEntry type="library" exported="" name="commons-codec-1.9" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-21.0.0" level="project" />
     <orderEntry type="module" module-name="Common" exported="" />
   </component>
 </module>

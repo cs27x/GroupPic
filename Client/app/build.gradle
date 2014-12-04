@@ -22,7 +22,7 @@ android {
 
 dependencies {
     compile project(":Common")
-
+    compile 'com.melnykov:floatingactionbutton:1.0.7'
     compile("com.jakewharton:butterknife:5.1.2")
     compile fileTree(dir: "libs", include: ["*.jar"])
 }
