@@ -57,8 +57,10 @@ public class PictureController implements PictureSvcApi {
 	@RequestMapping(value="/picture", method=RequestMethod.POST)
 	@ResponseBody
 	public Picture sendPicture(@RequestBody Picture p) {
-		System.out.println(p.toString());
+		System.out.println(p.getSender());
 		p.setSender(getCurrentUser());
+		System.err.println("CURRENT USER: " + getCurrentUser());
+		System.err.println(p.getSender());
 		return pictureRepo.save(p);
 	}
 
