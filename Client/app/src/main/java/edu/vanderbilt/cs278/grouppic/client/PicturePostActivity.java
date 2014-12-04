@@ -60,8 +60,8 @@ public class PicturePostActivity extends Activity {
     @InjectView(R.id.iv_selected_image)
 	protected ImageView picture;
 	
-	@InjectView(R.id.et_user)
-	protected EditText username;
+	//@InjectView(R.id.et_user)
+	//protected EditText username;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +85,7 @@ public class PicturePostActivity extends Activity {
 			Toast.makeText(this, "Please select a picture", Toast.LENGTH_LONG).show();
 			return;
 		}
-		String user = getSenderName();
+		final String user = "user";
 		if(user.length()==0){
 			Toast.makeText(this, "Input a username", Toast.LENGTH_LONG).show();
 			return;
@@ -107,7 +107,7 @@ public class PicturePostActivity extends Activity {
                     ByteArrayOutputStream stream = new ByteArrayOutputStream();
                     currentImage.compress(Bitmap.CompressFormat.PNG, 100, stream);
                     byte[] byteArray = stream.toByteArray();
-                    Picture p = new Picture("user", new Date().getTime(), recipients,
+                    Picture p = new Picture(user, new Date().getTime(), recipients,
                             new ArrayList<Caption>(), byteArray);
                     p.setId(r.nextLong());
                     Log.d("Send Picture", p.toString() + " id: " + p.getId());
@@ -235,11 +235,6 @@ public class PicturePostActivity extends Activity {
 					recipients.add(s);
 			}
 			return recipients;
-		}
-		
-		private String getSenderName(){
-			String user = username.getText().toString();
-			return trimAuxiliaryChars(user);
 		}
 		
 		private String trimAuxiliaryChars(String s){

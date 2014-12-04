@@ -14,10 +14,10 @@
         android:layout_width = "match_parent"
         android:layout_height = "wrap_content"
         android:layout_centerHorizontal = "true"
-        >
+        android:weightSum="1">
     	<Button
         	android:id = "@+id/button_select_pic"
-        	android:layout_height = "wrap_content"
+        	android:layout_height = "fill_parent"
         	android:layout_width = "wrap_content"
         	android:text = "Select Picture"
         	android:onClick = "selectPicture"
@@ -30,6 +30,18 @@
     	    android:text = "Take Picture"
     	    android:onClick = "takePicture"
     	    />
+
+        <Button
+            android:id= "@+id/button_send_picture"
+            android:layout_height = "wrap_content"
+            android:layout_width = "wrap_content"
+            android:text = "Send"
+            android:onClick = "sendPicture"
+            android:layout_weight="0.34"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="false"
+            android:layout_below="@+id/lv_friend_list" />
+
     </LinearLayout>
     <ImageView 
         android:id = "@+id/iv_selected_image"
@@ -38,6 +50,8 @@
         android:layout_width = "wrap_content"
         android:minHeight="100dp"
         android:minWidth = "100dp"
+        android:maxHeight="100dp"
+        android:maxWidth = "100dp"
         android:adjustViewBounds="true"
         android:layout_centerHorizontal = "true"
         android:src = "@drawable/ic_launcher"
@@ -62,36 +76,5 @@
         	android:textSize = "20sp"
         	android:hint="Friend, Friend, Friend..."
     	/>
-    	
-    	<TextView
-        android:id = "@+id/text_user"
-        android:text = "Username:"
-        android:layout_height = "wrap_content"
-        android:layout_width = "wrap_content"
-        android:layout_centerHorizontal = "true"
-        android:layout_below = "@+id/lv_friend_list"
-        android:textSize = "23sp"
-    />
-    
-    	<EditText
-        	android:id = "@+id/et_user"
-        	android:layout_height = "100dp"
-        	android:layout_width = "wrap_content"
-        	android:layout_below = "@+id/text_user"
-        	android:layout_centerHorizontal = "true"
-        	android:inputType="text"
-        	android:textSize = "20sp"
-        	android:hint="Username"
-    	/>
-    
-    <Button
-        android:id= "@+id/button_send_picture"
-        android:layout_below = "@+id/et_user"
-        android:layout_height = "wrap_content"
-        android:layout_width = "wrap_content"
-        android:text = "Send"
-        android:onClick = "sendPicture"
-        android:layout_centerHorizontal = "true"
-    />
 
 </RelativeLayout>
