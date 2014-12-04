@@ -6,22 +6,38 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.grouppic.PicturePostActivity" >
+    tools:context="com.example.grouppic.PicturePostActivity" 
+    >
 
-    <Button
-        android:id = "@+id/button_select_pic"
+    <LinearLayout 
+        android:id = "@+id/picture_buttons"
+        android:layout_width = "match_parent"
         android:layout_height = "wrap_content"
-        android:layout_width = "wrap_content"
-        android:text = "Select Picture"
-        android:onClick = "selectPicture"
         android:layout_centerHorizontal = "true"
-    />
-    
+        >
+    	<Button
+        	android:id = "@+id/button_select_pic"
+        	android:layout_height = "wrap_content"
+        	android:layout_width = "wrap_content"
+        	android:text = "Select Picture"
+        	android:onClick = "selectPicture"
+    	/>
+    	
+    	<Button 
+    	    android:id = "@+id/button_take_pic"
+    	    android:layout_height = "wrap_content"
+    	    android:layout_width = "wrap_content"
+    	    android:text = "Take Picture"
+    	    android:onClick = "takePicture"
+    	    />
+    </LinearLayout>
     <ImageView 
         android:id = "@+id/iv_selected_image"
-        android:layout_below = "@+id/button_select_pic"
+        android:layout_below = "@+id/picture_buttons"
         android:layout_height = "wrap_content"
         android:layout_width = "wrap_content"
+        android:minHeight="400dp"
+        android:minWidth = "400dp"
         android:layout_centerHorizontal = "true"
         android:src = "@drawable/ic_launcher"
      />
@@ -36,17 +52,40 @@
         android:textSize = "23sp"
     />
     
-    <ListView
-        android:id = "@+id/lv_friend_list"
+    	<EditText
+        	android:id = "@+id/lv_friend_list"
+        	android:layout_height = "100dp"
+        	android:layout_width = "match_parent"
+        	android:layout_below = "@+id/text_select_friends"
+        	android:inputType="text"
+        	android:textSize = "20sp"
+        	android:hint="Friend, Friend, Friend..."
+    	/>
+    	
+    	<TextView
+        android:id = "@+id/text_user"
+        android:text = "Username:"
         android:layout_height = "wrap_content"
         android:layout_width = "wrap_content"
-        android:layout_below = "@+id/text_select_friends"
         android:layout_centerHorizontal = "true"
+        android:layout_below = "@+id/lv_friend_list"
+        android:textSize = "23sp"
     />
+    
+    	<EditText
+        	android:id = "@+id/et_user"
+        	android:layout_height = "100dp"
+        	android:layout_width = "wrap_content"
+        	android:layout_below = "@+id/text_user"
+        	android:layout_centerHorizontal = "true"
+        	android:inputType="text"
+        	android:textSize = "20sp"
+        	android:hint="Username"
+    	/>
     
     <Button
         android:id= "@+id/button_send_picture"
-        android:layout_below = "@+id/lv_friend_list"
+        android:layout_below = "@+id/et_user"
         android:layout_height = "wrap_content"
         android:layout_width = "wrap_content"
         android:text = "Send"
