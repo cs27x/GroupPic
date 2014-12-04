@@ -58,6 +58,7 @@ public class PictureController implements PictureSvcApi {
 	@ResponseBody
 	public Picture sendPicture(@RequestBody Picture p) {
 		System.out.println(p.toString());
+		p.setSender(getCurrentUser());
 		return pictureRepo.save(p);
 	}
 
@@ -90,6 +91,7 @@ public class PictureController implements PictureSvcApi {
 	@RequestMapping(value="/picture/{id}/comments", method=RequestMethod.POST)
 	public Caption postCaption(Caption c, @PathVariable ("id") long id) {
 		c.setPictureId(id);
+		c.setUser(getCurrentUser());
 		return captionRepo.save(c);
 	}
 

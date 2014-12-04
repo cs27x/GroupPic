@@ -28,7 +28,7 @@ public class PictureSvc {
     public static final String SERVER_GENY = "https://192.168.56.1:8443";
     public static final String SERVER_LOCAL_LAPTOP = "https://192.168.1.126:8443";
     public static final String CLIENT_ID = "mobile";
-    public static final String SERVER = SERVER_LOCAL_LAPTOP;
+    public static final String SERVER = SERVER_GENY;
 
 
     private static final Gson gson = new GsonBuilder()
