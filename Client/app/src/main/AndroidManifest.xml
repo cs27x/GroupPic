@@ -7,9 +7,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="18" />
-
+        android:minSdkVersion="18"
+        android:targetSdkVersion="20" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -18,11 +17,12 @@
         <activity
             android:name="edu.vanderbilt.cs278.grouppic.client.PictureDetailActivity"
             android:label="@string/title_activity_photo_detail"
-            android:parentActivityName="edu.vanderbilt.cs278.grouppic.client.MainListView">
+            android:parentActivityName=".MainNewsFeedActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.vanderbilt.cs278.grouppic.client.MainListView" />
+                android:value="edu.vanderbilt.cs278.grouppic.client.MainGridViewActivity" />
         </activity>
+
         <activity
             android:name="edu.vanderbilt.cs278.grouppic.client.LoginScreenActivity"
             android:label="@string/app_name" >
@@ -30,19 +30,22 @@
         <activity
             android:name="edu.vanderbilt.cs278.grouppic.client.MainListView"
             android:label="@string/title_activity_main_list_view" >
+        </activity>
+        <activity
+            android:name=".MainNewsFeedActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="edu.vanderbilt.cs278.grouppic.client.PicturePostActivity"
             android:label="Send Picture"
-            android:parentActivityName="edu.vanderbilt.cs278.grouppic.client.MainListView">
+            android:parentActivityName=".MainNewsFeedActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.vanderbilt.cs278.grouppic.client.MainListView" />
+                android:value="edu.vanderbilt.cs278.grouppic.client.MainGridViewActivity" />
         </activity>
     </application>
 

@@ -1,5 +1,7 @@
 /build
 /bin
 .DS_STORE
+.classpath
+.gradle/
 .project
-.settings
+.settings/
